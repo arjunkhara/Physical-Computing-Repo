@@ -93,3 +93,72 @@ else {
 </code></pre>
 
 Topic 2 introduces the PWM function which is essentially the Arduino turning on and off the LED extremely quickly to produce a square wave that emulates the properties of the sine wave of electric current and PWM synchronocity. In future projects I believe the PWM function will be essential to emulating, if not also controlling, the circuit properties and attached transducer components.
+
+
+<h1>Topic 3</h1>
+
+Topic 3 focuses on creating a love-o-meter, which is essentially an introduction to sensors — in this case for temperature. The objective is to build a sensor that measures body temperature vis-a-vis ambient air temperature. Then, using the differences in voltage due to thermodynamic fluctuation, a score is given as indicated by the number of LEDs that light up. Higher the temperature, the more LEDs light up.
+
+This initial introduction to sensor technology was fascinating. I was able to wire up the circuit with some difficulty given the number of parts and regard for the temperature sensor’s orientation (the curved head has to face away from the board). The variable voltage pin (the middle leg on the temperature sensor) is plugged directly into an analog pin on the Arduino.
+
+The task worked fine. Owing to my room being heated the temperatures registered accurately around 26°C and fluctuated to about 27.73°C upon moving my fingers close to the sensor. I was able to make two LED pins light up by placing my fingers on and around the temperature sensor, thus rendering me a somewhat promising candidate for love, but not quite the hottie. More importantly, this project was also an introduction to the serial monitor, which, from what I am able to extrapolate, is similar in function to the console.log command used in JavaScript for websites. The serial monitor provides real-time readings of the voltage differences due to temperature fluctuations. This voltage is converted to temperature via a simple equation provided in the project book.
+
+I was interested in why the sensor value is between 0 and 1023 (making a total of 1024 point values, or the equivalent of bytes to 1 Kilobyte, kilobytes to 1 megabyte, megabytes to 1 gigabyte and so on). Upon conducting further searches in Arduino’s community forum [+] and on Arduino Stackexchange [+] I discovered that 1023 is the maximum possible value of a 10-bit unassigned integer. Since the index count starts from 0, not 1, 1023 represents the entirety of 1024. There is also some debate on whether the divisor value for the conversion formula should be 1023 or 1024, since both provide nearly similar answers but for specificity purposes, 1024 as the divisor makes for a more accurate conversion reading. Interestingly, the formula in the book states a divisor of 1024, yet when applied to the equation sensorVal * 5 / 1023 provides a more accurate estimation of the 5V, which is what the Arduino power supply is purported to be. However, the incremental difference between 1023 and 1024 accounts for approximately 0.1% difference, and in practice the board will approximate 5V though this will never be accurately achieved — more like 4.995V. I nonetheless felt it was important to note such details, minute though the values are, especially when starting off in a new field.
+
+I was therefore able to accomplish the task, and then turned to a new problem that I was pondering — how hot could the sensor really get before it skewed its values.
+
+I read up on the tutorial section on the official Arduino website which details calibrating sensor input [+] with five-second measurements and analog sensors, and will be applying this to future projects. At this stage, I re-wired the board to pass the current directly through the sensors (please see the video above) and reloaded the sketch into the board. Within a minute, the temperature readings on the serial monitor were reaching 247 °C. At this point an LED shorted, whereupon I unplugged the USB cable. For the sake of safety I have not included this circuit’s diagram. Nonetheless the findings from this experiment are incredibly useful to me for future projects since it is evident that the sensor and the board are able to withstand boiling point temperatures and still function normally for a reasonable duration. Apart from the LED, both the temperature sensor and the Arduino board were in perfect state and when I repeated the task from the book the values registered normally.
+
+I also considered the optional challenge to determine an interface that best determines compatibility. Given the current limitations of this task so far, my recommendation would be a simple matter of two people blowing on the sensor at the same time to see which couple can provide maximum heat levels possible.
+
+At this point I noted that all the projects so far had been using light as an indicator, and so I began to think about using sound instead. However, I lacked the necessary equipment — a microphone, which I will acquire soon. As a side project I intend to replace the LEDs with the microphone and, with some help from Henry’s Bench Online Tutorial on Sound with Arduino [+], will set up the project to test temperature variances and indicate the differences in voltage through sound. I am hoping this future project will highlight another important step to understanding physical computing. The use of all of our senses, not just sight, to enrich creative experiences and, among its myriad uses, provide the critical element of accessibility across a wider spectrum of users.
+
+Needless to say I am confident this foray into sound-based actuators (instead of just light) will be a welcome addition to my slowly-growing repertoire in physical computing. I am also compelled to say that I am now thoroughly enjoying this module, not just for its academic value but also its practical applications which open up a world of creative ideas. The link to the video and code is below.
+https://youtu.be/iJo9BfdIr7o
+
+<pre><code>
+/* Topic 3: Introduction to Serial Monitors */
+
+const int sensorPin = A0;
+const float baselineTemp = 17.0;
+
+void setup() {
+Serial.begin(9600); //serial port with baud rate set
+for(int pinNumber = 2; pinNumber<5; pinNumber++){
+  pinMode(pinNumber,OUTPUT);
+  digitalWrite(pinNumber, LOW);
+  //above for loop similar to Javascript for and while loops
+}
+}
+
+void loop() {
+    int sensorVal = analogRead(sensorPin);
+    Serial.print("Sensor Value: ");
+    Serial.print(sensorVal);
+    float voltage = (sensorVal/1024.0) * 5.0;
+    Serial.print(", Volts: ");
+    Serial.print(voltage);
+    Serial.print(", degrees C: ");
+    float temperature = (voltage - .5) * 100;
+    Serial.println(temperature);
+    
+    if(temperature < baselineTemp){
+      digitalWrite(2, LOW);
+      digitalWrite(3, LOW);
+      digitalWrite(4, LOW);
+    } else if (temperature >= baselineTemp+2 && temperature < baselineTemp+4){
+      digitalWrite(2, HIGH);
+      digitalWrite(3, LOW);
+      digitalWrite(4, LOW);
+    }else if (temperature >= baselineTemp+4 && temperature < baselineTemp+6){
+      digitalWrite(2, HIGH);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+    }else if (temperature >= baselineTemp+6){
+      digitalWrite(2, HIGH);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, HIGH);
+    }
+    delay(1);
+}
+</code></pre>
