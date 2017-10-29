@@ -233,3 +233,24 @@ void loop() {
 It is interesting to note that the temperature sensor can be outputted through a variety of experiences — light, sound, sequencing, monitor output etc. This has made me think about the possibilities of experimental outputs as performance items themselves, for example publishing in real-time to a web server the readouts from several serial monitors performing the same experiment and highlighting minute differences as a black and white collage. Once again the real takeaway from all these basic tasks and additional experimentation is the possibilities that open up once physical computing integrates with natural environments. In fact it is already difficult to define where a natural environment ends and a computational system begins.
 
 Whatever the case, I believe this is a path from which there is no return, and I for one am excited about that. The next step is most likely to acquire a second Arduino kit and experiment with dual-level circuitry. This week has been exciting to say the least and I am thoroughly enjoying physical computing as both a practical hands-on process as well as a philosophical avenue into understanding the human condition. Here is the link to the image of this topic's circuit diagram: https://github.com/arjunkhara/physical-computing-repo/blob/master/topic-4-beyond-circuitry.png
+
+
+Here are the references and bibliography for the first four topics of Physical Computing. These are useful sources which I have consulted during my first week of learning Physical Computing.
+
+• Adafruit – Using a Temp Sensor, Adafruit (2017) on Adafruit Website (accessed October 2017) at https://learn.adafruit.com/tmp36-temperature-sensor/using-a-temp-sensor
+
+• Arduino Community Forum, Arduino (2017) on Arduino Website (accessed October 2017) at https://forum.arduino.cc/index.php?topic=353524.0
+
+• Arduino Stackexchange, Stack Exchange (2017) on Stack Exchange Website (accessed October 2017) at https://arduino.stackexchange.com/questions/1667/significance-of-the-numbers-used-in-the-manual
+
+• Arduino Tutorials, Arduino (2017) on Arduino Website (accessed October 2017) at www.arduino.cc
+
+• Exploring Arduino: Tools and Techniques for Engineering Wizardry, Blum, J. (2013), Indiana:John Wiley & Sons
+
+• Getting Acquainted With Arduino Tutorial 1, Jeremy Blum (2011), on YouTube (accessed October 2017) at https://www.youtube.com/watch?v=fCxzA9_kg6s
+
+• Henry’s Bench Arduino Tutorials, Henry’s Bench (2016) on Henry’s Bench Website (accessed October 2017) at http://henrysbench.capnfatz.com/
+
+• How To Make (Almost) Anything, Niels Gershenfeld (2014), on YouTube (accessed October 2017) at https://www.youtube.com/watch?v=FVOHo9YFuyg
+
+• Practical Electronics for Inventors (4th Edition), Scherz, P. and Monk, S. (2016), New York:McGraw-Hill Education
