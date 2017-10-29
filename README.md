@@ -162,3 +162,74 @@ void loop() {
     delay(1);
 }
 </code></pre>
+
+
+<h1>Topic 4</h1>
+
+Topic 4 covers the fundamentals of a colour mixing lamp — the common cathode RGB LED, and introduces the use of photo resistors with red, green, and blue coloured strips. The requirements of the task are to make the LED change colour depending on how much light one or more of the three photo resistors receive along their respective wavelengths of colour (provided by the strips). The project can be conducted in a darkened room or by simply covering the resistors with an object. The LED changes colour accordingly, thus acting as a gauge for the amount of light passing through each of the photo resistors.
+
+The code for this project (the longest yet) builds on past topics and integrates the serial monitor to display readouts of the change in voltage as the amount of light is varied. This project was a success and I was able to accomplish the tasks set in the book. The additional challenge asks what possible uses this type of system could be used for, and how, for example, this setup might provide an indication of the weather. I am able to see that this setup might work well for sky changes — overcast versus sunny, but would not be optimum for weather types involving precipitation — rain, snow, hail etc. I am confident, though, that future projects in this book and through other channels will involve greater specificity for such goals.
+
+Upon completing the basic task, I wondered at how temperature (from topic 3) might affect the LED and if I could either devise or find or customise such an experiment in which the coloured LED would change depending on how hot the temperature got. I found a similar reference in ‘Exploring Arduino’ by Jeremy Blum and in ‘Arduino Programming’ by Mark Torvalds. I chose ‘Exploring Arduino’, which provides only the basic code base and does not include any details on the crucial serial monitor, which I would need for such an experiment. But drawing from topic 3’s learnings, I was able to extrapolate the code to create my own custom variables and serial log through which I would be able to measure the temperature that corresponded with the type of light — blue for cool, red for warm, and green for optimum. The following code snippet is a result of this customisation and extrapolation.
+
+<pre><code>
+/* Topic 4 Beyond: Experiment with LED and temperature sensor setup (custom project combining topics 3 and 4) */
+/* Special thanks to Jeremy Blum, author, Exploring Arduino, for the tutorial on the basics for this project. */
+/* Code for serial monitor and custom vals from extrapolation of past learnings, Arduino Projects Topics 1 - 3 */
+
+const int blueLED = 9;
+const int greenLED = 10;
+const int redLED = 11;
+const int sensorPin = A0;
+const float baselineTemp = 17.0;
+
+const int LOWER_BOUND = 156;
+const int UPPER_BOUND = 163;
+
+int sensorVal = 0;
+
+void setup() {
+  Serial.begin(9600); //serial port with baud rate set
+for(int pinNumber = 9; pinNumber<12; pinNumber++){
+  pinMode(pinNumber,OUTPUT);
+  digitalWrite(pinNumber, LOW);
+  //above for loop similar to Javascript for and while loops
+}
+  
+    pinMode (blueLED, OUTPUT);
+    pinMode (greenLED, OUTPUT);
+    pinMode (redLED, OUTPUT);
+}
+
+void loop() {
+   int sensorVal = analogRead(sensorPin);
+    Serial.print("Sensor Value: ");
+    Serial.print(sensorVal);
+    float voltage = (sensorVal/1024.0) * 5.0;
+    Serial.print(", Volts: ");
+    Serial.print(voltage);
+    Serial.print(", degrees C: ");
+    float temperature = (voltage - .5) * 100;
+    Serial.println(temperature);
+    
+    //begin conditional statement
+    
+    if(sensorVal < LOWER_BOUND) {
+      digitalWrite (redLED, LOW);
+      digitalWrite (greenLED, HIGH);
+      digitalWrite (blueLED, LOW);
+    } else if (sensorVal > UPPER_BOUND){
+      digitalWrite (redLED, HIGH);
+      digitalWrite (greenLED, LOW);
+      digitalWrite (blueLED, LOW);
+    } else {
+      digitalWrite (redLED, LOW);
+      digitalWrite (greenLED, LOW);
+      digitalWrite (blueLED, HIGH);
+    }
+}
+</code></pre>
+
+It is interesting to note that the temperature sensor can be outputted through a variety of experiences — light, sound, sequencing, monitor output etc. This has made me think about the possibilities of experimental outputs as performance items themselves, for example publishing in real-time to a web server the readouts from several serial monitors performing the same experiment and highlighting minute differences as a black and white collage. Once again the real takeaway from all these basic tasks and additional experimentation is the possibilities that open up once physical computing integrates with natural environments. In fact it is already difficult to define where a natural environment ends and a computational system begins.
+
+Whatever the case, I believe this is a path from which there is no return, and I for one am excited about that. The next step is most likely to acquire a second Arduino kit and experiment with dual-level circuitry. This week has been exciting to say the least and I am thoroughly enjoying physical computing as both a practical hands-on process as well as a philosophical avenue into understanding the human condition. Here is the link to the image of this topic's circuit diagram: https://github.com/arjunkhara/physical-computing-repo/blob/master/topic-4-beyond-circuitry.png
