@@ -258,3 +258,35 @@ Here are the references and bibliography for the first four topics of Physical C
 <h1>Topic 5</h1>
 
 Topic 5 introduces, among other elements, two major components of Arduino: calling native libraries for software, and the mechanisms and functions of the servo motor for hardware. The project was to build a mood meter by manipulating a potentiometer, which in turn affected the servo motor. As the book and external tutorials explain (please see reference and bibliography for titles) the servo motor only completes a 180 degree turn cycle. I learned that servo motors are made up of a small DC motor and controlled through PWM. The servo motor is in fact a highly efficient system, using just enough energy to get from its current position to its desired position. That means the servo motor only has to work as hard as the distance it needs to travel across. The potentiometer basically acts as a resistor to vary the voltage flowing into the servo. When a servo motor reaches its end position i.e. either 0 degrees or 180 degrees, it typically cuts the current flowing through it causing it to stop, and/or has in-built gear mechanisms to stop further motion. This stop is done for a definite purpose. There are also AC servo motors, typically used in ecosystems with higher currents – mainly for large-scale industrial use. Because servo motors convert rotary motion to linear output, they are extremely useful for radar sensing and sweep sensing over a 180 degree arc, though from further research online, the optimum arc is 120 degrees.
+
+A possible final project could be building a device that recognises the colour of different marbles, and the servo motor spins as far as needed to point to the corresponding coloured dish in which the mechanism can dispense that marble. This colour sorter could be very interesting using sensors and actuators that we have already learned so far in this module. Coupled with future tutorials on laser cutting and moulding, a rig of the sorter can be designed and prototyped by weeks 6 through 8.
+
+Such a project, I speculate, would require a sorting mechanism made up of a claw attached to a servo motor. A camera using RGB tricolour sensors could pick up the frequency of the coloured marble emitted and match that value range to the corresponding colour in the code. The code could then execute to move the servo motor as far as needed along a pre-programmed rotary route – the dispense position. When the servo motor reaches its desired position it will stop and the claw after a few seconds delay can release the ball into its corresponding colour, thus creating an efficient colour sorting machine.
+<pre><code>
+/*
+ Arduino Week 2 Project 5
+ */
+ 
+#include <Servo.h>
+Servo myServo;
+int const potPin = A0;
+int potVal;
+int angle; 
+
+void setup() {
+  myServo.attach(9);
+ Serial.begin(9600); 
+}
+
+void loop() {
+ potVal = analogRead(potPin);
+ Serial.print("potVal: ");
+ Serial.print(potVal);
+ angle = map(potVal, 0, 1023, 0, 179);
+ Serial.print(", angle: ");
+ Serial.println(angle);
+ myServo.write(angle);
+ delay(15);
+}
+
+</code></pre>
