@@ -347,3 +347,47 @@ It must be noted that the code provided in the book for this task resulted in an
 
 The code block to play just the introduction to the Imperial March for Star Wars is below. Strictly, on int notes 261, 329,
 and 400 are needed and so this code block and corresponding circuit setup can run with just three switches.
+
+<pre><code>
+/*
+Resistor Ladder - parallel circuit with differing voltages - switch controlled - into analog pin
+*/
+
+/*int buttons[6];
+int buttons[0] = 2;
+This block of code causes an error. On further investigation this code is redunant since these variables are not utilised elsewhere in the sketch. It should work fine without them.
+*/
+
+int notes[] = {261, 294, 329, 400}; //these notes are for the imperial march from Star Wars
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  // local variable to hold input on pin A0
+  int keyVal = analogRead(A0);
+  Serial.println(keyVal);
+
+  if(keyVal == 1023){
+    // play first frequency in array on pin 8
+    tone(8, notes[0]);
+  }
+  else if(keyVal >= 990 && keyVal <= 1010){
+    // play second frequency in array on pin 8
+    tone(8, notes[1]);
+  }
+  else if(keyVal >= 505 && keyVal <= 515){
+    // play third frequency in array on pin 8
+    tone(8, notes[2]);
+  }
+  else if(keyVal >= 5 && keyVal <= 10){
+    // play fourth frequency in array on pin 8
+    tone(8, notes[3]);
+  }
+  else{
+    // if the value is out of range, play no tone
+    noTone(8);
+  }
+}
+</code></pre>
