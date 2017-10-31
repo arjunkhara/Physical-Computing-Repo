@@ -337,3 +337,13 @@ void loop() {
   delay(10);
 }
 </code></pre>
+
+<h1>Topic 7</h1>
+Topic 7 built on the learnings of past week’s topics as well as topic 6 to create a rudimentary piano with four switches, connected in parallel. The switches controlled the current passing through and the voltage was mapped to a set of tones that the Arduino was programmed to emit via the piezo. The setup was straightforward and the result was a success. I was particularly interested in how the frequency of notes related to the sound produced and quickly realised that – within the limitations of the Arduino’s power output (5V) and the space on the breadboard, an entire piano layout could be constructed. But given resource limitations, I decided to use go beyond the basic task required – now that I was more familiar with sound through the Arduino -and decided to reprogram the keys to different frequencies using a conversion chart that can be accessed here[+].
+
+By varying the note frequency I was able to compose the rudimentary theme of the Imperial March from Star Wars – a dream for Star Wars fans and a necessary rite of passage for Arduino beginners. The most interesting thing about going beyond the required scope of the task, was the discovery that virtually any sound scale, including the pentatonic scale, can be mapped to the switches and pre-programmed to output that particular note. With more space and more power, one may actually build an entire 88-key piano. This of course is one of several applications, and this particular task drove me to further research sound through Arduino – now a firmly embedded player in my physical computing environment. I have to add I thoroughly enjoyed this project and have included the resources I consulted in the references and bibliography section below. I am planning to use this for the next project, if feasible.
+
+It must be noted that the code provided in the book for this task resulted in an error, which, I am happy to say, I was able to circumnavigate on my own through some trial and error. Basically the error resulted from the int buttons coming up as undefined and so the code block could not execute. I read through the rest of the code and realised that the declaration was redundant any way since the code ran independent of these declarations, given the runtime order was already enclosed in the void loop section of the code. Also, to add more impact to this task, it is easy to connect LEDs to each switch so that when the switch is pressed the sound comes on and the LED lights up.
+
+The code block to play just the introduction to the Imperial March for Star Wars is below. Strictly, on int notes 261, 329,
+and 400 are needed and so this code block and corresponding circuit setup can run with just three switches.
