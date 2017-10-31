@@ -292,3 +292,13 @@ void loop() {
 </code></pre>
 
 Here is the link to the video for this topic: https://youtu.be/L4PMdpOmEG8
+
+<h1>Topic 6</h1>
+
+Topic 6 focuses on using a photo resistor to vary the amount of voltage, and outputting the changes through a piezo. The setup was quite straightforward and the results were good. This was our first project with sound as a significant component of an intelligent circuit. The applications for such a mechanism are indeed countless, from a weather monitoring station that buzzes when the sky is overcast, to an alarm clock that sounds when the room is light enough – something that was easy enough to replicate by simply switching the code around so that when more light fell on the photo resistor the more the piezo sounded.
+
+I found out (referenced below) that a piezo aggregates charge in a solid material as a result of a strain applied across a circuit. Interestingly, several piezos can be stacked like pizzas to create a piezo stack or piezo assembly. These stacks can act as delivery systems in diesel engines or drilling equipment. The standard microphone and the quartz watch mechanism also uses piezoelectricity to keep time through oscillation.
+
+Piezoelectricity can also be generated simply by walking. When a piezo stack is installed in a shoe or piece of footwear, the motion and contact of the shoe with the ground and up again causes a charge to accumulate within the piezo, thus generating free electricity, albeit in relatively tiny quantities. However, the applications of such technology are far-reaching. It is also interesting to note that the sound produced by the piezo is the result of creating an imbalance in the particles / crystals / material that results in a force of charges, which induces the flow of electricity. The device used in this task is therefore known as a piezo transducer – a vehicle to facilitate piezoelectric charges. The term piezoelectricity comes from the Greek word piezein which literally means to press.
+
+
