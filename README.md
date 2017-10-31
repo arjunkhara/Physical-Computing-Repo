@@ -299,6 +299,41 @@ Topic 6 focuses on using a photo resistor to vary the amount of voltage, and out
 
 I found out (referenced below) that a piezo aggregates charge in a solid material as a result of a strain applied across a circuit. Interestingly, several piezos can be stacked like pizzas to create a piezo stack or piezo assembly. These stacks can act as delivery systems in diesel engines or drilling equipment. The standard microphone and the quartz watch mechanism also uses piezoelectricity to keep time through oscillation.
 
-Piezoelectricity can also be generated simply by walking. When a piezo stack is installed in a shoe or piece of footwear, the motion and contact of the shoe with the ground and up again causes a charge to accumulate within the piezo, thus generating free electricity, albeit in relatively tiny quantities. However, the applications of such technology are far-reaching. It is also interesting to note that the sound produced by the piezo is the result of creating an imbalance in the particles / crystals / material that results in a force of charges, which induces the flow of electricity. The device used in this task is therefore known as a piezo transducer – a vehicle to facilitate piezoelectric charges. The term piezoelectricity comes from the Greek word piezein which literally means to press.
+Piezoelectricity can also be generated simply by walking. When a piezo stack is installed in a shoe or piece of footwear, the motion and contact of the shoe with the ground and up again causes a charge to accumulate within the piezo, thus generating free electricity, albeit in relatively tiny quantities. However, the applications of such technology are far-reaching. It is also interesting to note that the sound produced by the piezo is the result of creating an imbalance in the particles / crystals / material that results in a force of charges, which induces the flow of electricity. The device used in this task is therefore known as a piezo transducer – a vehicle to facilitate piezoelectric charges. The term piezoelectricity comes from the Greek word piezein which literally means to press. Here is the link to the video of this demo: https://youtu.be/bN5AUppz_tg
 
+And here is the code base for this project:
+<pre><code>
+/*
+ Arduino Week 2 Project 6
+ */
 
+/*
+This is the theremin and piezo circuit code with light detection as an alternative to capacitance
+*/
+int sensorValue;
+int sensorLow = 1023;
+int sensorHigh = 0;
+const int ledPin = 13;
+void setup() {
+pinMode(ledPin, OUTPUT);
+digitalWrite(ledPin, HIGH);
+/* The while loop */
+while (millis() < 5000) {
+  sensorValue = analogRead(A0);
+ if (sensorValue > sensorHigh) {
+ sensorHigh = sensorValue;
+ }
+ if (sensorValue < sensorLow) {
+ sensorLow = sensorValue;
+ }
+ }
+ digitalWrite(ledPin, LOW);
+}
+
+void loop() {
+  sensorValue = analogRead(A0);
+  int pitch = map(sensorValue,sensorLow,sensorHigh, 50, 4000);
+  tone(8,pitch,20);
+  delay(10);
+}
+</code></pre>
