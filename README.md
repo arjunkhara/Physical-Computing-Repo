@@ -476,3 +476,21 @@ Topic 10 focuses on building a circuit to control the speed and direction of a m
 The H-Bridge plays an important role in electronics and physical computing, and warrants further examination. Essentially an H-Bridge performs four primary operations: Open; Forward; Backward; Braking. All four operations (or states of the bridge) are required for a motor to perform effectively. In the open state, all the switches remain open and the motor is at rest. In the forward and backward states opposite switches are running (converse configuration between forward and backward) to provide spin. The braking state is much like the open state except that the motor may still be running under its own momentum and will continue to do so till inertial forces slow it to a halt. If the switches on opposite sides were instead closed on the same side, the power source would short circuit causing a direct voltage to the ground and thus ruining the motor and perhaps its attached components.
 
 In this Arduino task, a button switch was used to start and stop the motor, and another button switch was used to alternate the motor direction. While flipping the direction with the latter switch made little difference to the circuitry, standard safety practice dictates that the motor be turned off (using the former button switch) before reversing the rotor direction in order to prevent leak-back of current into the circuits, which often causes harm to the components. Here is the link for the video demo for topic 10: https://youtu.be/tZTVSqjM_QU
+
+<h1>Week 3: References & Bibliography</h1>
+
+• Arduino Community Forum, Arduino (2017) on Arduino Website (accessed October 2017) at https://forum.arduino.cc/index.php?topic=353524.0
+
+• Arduino for Beginners: Essential Skills Every Maker Needs, Baichtal, J. (2014), United States of America: Pearson Education, Inc
+
+• Arduino Project Handbook: 25 Practical Projects To Get You Started (1st Edition), Geddes, M. (2015), San Francisco: No Starch Press
+
+• Arduino Tutorials, Arduino (2017) on Arduino Website (accessed October 2017) at www.arduino.cc
+
+• Beginning C++ Through Game Programming, Dawson, M (2015), United States of America:Cengage Learning
+
+• Exploring Arduino: Tools and Techniques for Engineering Wizardry, Blum, J. (2013), Indiana:John Wiley & Sons
+
+• Games, Design and Play, A Detailed Approach to Iterative Game Design, Macklin, C and Sharp, J. (2016), New York: Addison-Wesley
+
+• Practical Electronics for Inventors (4th Edition), Scherz, P. and Monk, S. (2016), New York:McGraw-Hill Education
