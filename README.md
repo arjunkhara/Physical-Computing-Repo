@@ -534,3 +534,5 @@ void loop() {
   timer++; //increment up from zero by value of 1
 }
 </code></pre>
+
+This next block of code is to decrement the timer from a value starting at 30000ms (5 minutes). Also, as a quick aside, when writing code within pre tags use ampersandHex60; and ampersandHex62 for opening and closing < >.
