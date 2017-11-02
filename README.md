@@ -391,3 +391,13 @@ void loop() {
   }
 }
 </code></pre>
+
+<h1>Topic 8</h1>
+
+Topic 8 was the culmination of every topic, from 1 through 7. The task was to create an hourglass that measured the passing of a block of time - in this case an hour - by switching on an LED. The task required the setup of 6 LEDs for a total cumulative hourglass reading of 6 hours. The task was fun and the result was perfect. For the sake of time I brought down the time value to 0.6 seconds. The task worked as expected and every 0.6 seconds an LED came on.
+
+With the sound projects from the previous tasks still fresh, I decided to see if I could create a sketch and circuit that not only lit up - as the basic task required - but also worked in conjunction with the piezo to sound at every time interval. I returned to task 7 and with some trial and error, managed to write in a code block within a conditional statement, using the OR logic operator, to tell the Arduino that with every time interval and corresponding LED to high, the piezo should also buzz - but only when the time interval has passed and the LED comes on together. The result of this customised experiment was awesome and the sketch worked exactly as I intended it to.
+
+It is important to note how useful it is to experiment by fusing bits of discrete code and knowledge to extrapolate new ideas. As the tasks are getting more complex, I am also learning how to manage by workflow and processes. SO for this particular custom experiment, I first designed the circuit using Tinkercad. With the circuit in place I began focusing on the code, working through the errors one by one, till I figured out the best solution so far (I am sure there are better ones which I will discover as I make more progress). The result was a satisfying blend of several learnings, and a system that used both sound and light to alert for each time interval. I can see further applications to this project now that I am beginning to figure out how to make light and sound work in tandem. With the introduction of motion to the mix, it will very soon be possible to create much more complex (and satisfying) structures towards the final project, and hopefully beyond this masters programme.
+
+I got my second taste with Tinkercad to draw circuit diagrams and run simulations. (Tinkercad has replaced circuits.io). The following image is the circuit diagram of the above-mentioned experiment using the piezo as well as LEDs to alert. My circuit diagram for the custom light and sound hourglass is below.
