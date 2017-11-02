@@ -400,4 +400,63 @@ With the sound projects from the previous tasks still fresh, I decided to see if
 
 It is important to note how useful it is to experiment by fusing bits of discrete code and knowledge to extrapolate new ideas. As the tasks are getting more complex, I am also learning how to manage by workflow and processes. SO for this particular custom experiment, I first designed the circuit using Tinkercad. With the circuit in place I began focusing on the code, working through the errors one by one, till I figured out the best solution so far (I am sure there are better ones which I will discover as I make more progress). The result was a satisfying blend of several learnings, and a system that used both sound and light to alert for each time interval. I can see further applications to this project now that I am beginning to figure out how to make light and sound work in tandem. With the introduction of motion to the mix, it will very soon be possible to create much more complex (and satisfying) structures towards the final project, and hopefully beyond this masters programme.
 
-I got my second taste with Tinkercad to draw circuit diagrams and run simulations. (Tinkercad has replaced circuits.io). The following image is the circuit diagram of the above-mentioned experiment using the piezo as well as LEDs to alert. My circuit diagram for the custom light and sound hourglass is below.
+I got my second taste with Tinkercad to draw circuit diagrams and run simulations. (Tinkercad has replaced circuits.io). The following image is the circuit diagram of the above-mentioned experiment using the piezo as well as LEDs to alert. My code for the circuit diagram and custom light and sound hourglass is below.
+
+<pre><code>
+/*
+Arduino digital hour glass topic 8 of week 2 - going beyond to include sound
+ */
+
+const int switchPin = 8;
+const int pzoPin = 12; // the piezo is hooked up to pin 12
+int notes[] = {261, 294, 329, 400};
+unsigned long previousTime = 0;
+int switchState = 0;
+int prevSwitchState = 0;
+int led = 2;
+
+
+long interval = 6000; //for the sake of experimentation set timer to 6000ms
+
+void setup() {
+  Serial.begin(9600); //to monitor the piezo sound if needed
+  for(int x = 2;x<8;x++){
+    pinMode(x, OUTPUT);
+  }
+  pinMode(switchPin, INPUT);
+  pinMode(pzoPin, OUTPUT);
+}
+
+void loop(){ 
+  int keyVal = analogRead(A0);
+  Serial.println(keyVal);
+  
+  unsigned long currentTime = millis(); 
+  if(currentTime - previousTime > interval) {
+    previousTime = currentTime; 
+    // Turn LED on
+    digitalWrite(led, HIGH);
+    //progress led variable
+    led++; //led+1 cycles through
+    
+    if(led == 7 || led == 6 || led == 5 || led == 4 || led == 3 || led ==2 || led == 1){  //OR statement to work for each interval
+      pinMode(pzoPin, HIGH);
+      tone(pzoPin, 200, 1000);
+    }
+  }
+
+  switchState = digitalRead(switchPin); 
+  if(switchState != prevSwitchState){
+    // turn all LEDs off
+    for(int x = 2;x<8;x++){    
+      digitalWrite(x, LOW);
+      pinMode(pzoPin, LOW);
+    }  
+    led = 2;
+    previousTime = currentTime;
+  }
+  prevSwitchState = switchState;
+}
+</code></pre>
+
+Here is the link to the image of the circuit: https://github.com/arjunkhara/physical-computing-repo/blob/master/Piezo-Hourglass.png
