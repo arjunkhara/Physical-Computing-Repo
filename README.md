@@ -558,3 +558,5 @@ void loop() {
   timer--; //increment up from zero by value of 1
 }
 </code></pre>
+
+As I progress through this course I am getting more interested in the mechanics of user-interface and information output as a means to exercise control over physical computing devices. Like the serial monitor, the LCD has enormous applications for such intentions, and I am exploring creating a temperature readout, from previous topics, that displays the temperature on the LCD rather than as a serially mapped value in the monitor. I will be exploring these and other potential projects in the coming week, both on my own and as part of any corresponding group work.
