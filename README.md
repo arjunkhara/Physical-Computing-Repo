@@ -460,3 +460,11 @@ void loop(){
 </code></pre>
 
 Here is the link to the image of the circuit: https://github.com/arjunkhara/physical-computing-repo/blob/master/Piezo-Hourglass.png
+
+<h1>Topic 9</h1>
+
+Topic 9 introduces the motor - a staple of physical computing and component activity. The essential setup is extremely similar to the servo motor in topic 8, with the exception of the introduction of a 9V battery to provide power to the motor. Two more components introduced in this topic are the transistor (concepts of gates and drains vis-a-vis voltage changes) and the single-direction diode to regulate which way the motor will spin — in this case anticlockwise. The importance of this diode is essential to understanding and therefore controlling motor direction spin. For example if in a later project I wanted to build a drone, the spin directions of the main rotor blades are completely reliant on the use of an H-bridge and the way the diode is installed. I will be using an H-bridge in topic 10 and so will be attempting to regulate motor speed instead, as my additional activity challenge.
+
+While changing motor rotation direction is a relatively simple concept, I wanted to challenge myself to see if I could adjust the motor's speed. The same concept is used for a virtually infinite number of applications, from helicopter blades and fan speeds to robotics and wind and hydroelectric energy. I searched for a few tutorials online but ended up learning from Jeremy Blum's Exploring Arduino. Using PWM (a concept we have already learned) I figured out that a potentiometer could be used a simple speed regulator, and the serial monitor provides readouts (through mapping) of how fast the motor is turning.
+
+This was incredibly interesting since now I have control over my build, and having control especially of something as important as motor speed is always a good thing. The code snippet for this additional activity is below, together with the circuit diagram. The reference used for this additional activity is 'Exploring Arduino, by Jeremy Blum, p. 69 - 72' and has also been listed in the references and bibliography section at the end of this page. Here is the link to the video for topic 9: https://youtu.be/_9LCoNPrPfc
