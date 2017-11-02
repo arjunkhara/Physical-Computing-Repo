@@ -507,3 +507,30 @@ Topic 11 introduces, among other elements, the use of LCDs and for the first tim
 As a result, I consulted several books and online tutorials and came across an interesting project from Jeremy Blum’s Exploring Arduino book, referenced below. By combining the thrust of Blum’s tutorials with a few other Arduino tutorials (also referenced below) I was able to figure out a simple code that made the LCD output the cardinal series numbers as seconds. This was achieved by first setting a variable, called timer, to zero, then incrementing its value up by one, with a delay between increments of 1000ms, or one second.
 
 While Blum’s tutorial called for a simpler approach, I instead combined the layout of topic 11 with my own requirements to further challenge myself – in this case to have a potentiometer and tilt switch as component parts of the circuit but with independent controls over each. The result, simple in nature, was nonetheless fascinating. I got the LCD to act as an upward counter that would go on counting to 16 places, well beyond the lifetime of humanity. Likewise, a simple adjustment to the code, in this case setting the timer variable to any number (eg 300 seconds) and decrementing the value with code –1, I can build a countdown timer from any time point. The code for this challenge is below.
+
+<pre><code>
+
+/*
+Arduino Week 4 Project 11 (Beyond Part 1)
+*/
+
+/*
+LCD timer (source credit: Jeremy Blum, Exploring Arduino)
+*/
+
+// linking to the library
+#include <LiquidCrystal.h>
+int timer = 0; //starts the timer at zero
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+void setup() {
+    lcd.begin(16, 2); //rows of 16 and columns of 2 for the LCD display
+    lcd.print("Your Time is Now");
+}
+
+void loop() {
+  lcd.setCursor(0, 1); //begin display on second line
+  lcd.print(timer);
+  delay (1000); //increments of 1 second
+  timer++; //increment up from zero by value of 1
+}
+</code></pre>
