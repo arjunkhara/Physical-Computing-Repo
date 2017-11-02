@@ -494,3 +494,8 @@ In this Arduino task, a button switch was used to start and stop the motor, and 
 • Games, Design and Play, A Detailed Approach to Iterative Game Design, Macklin, C and Sharp, J. (2016), New York: Addison-Wesley
 
 • Practical Electronics for Inventors (4th Edition), Scherz, P. and Monk, S. (2016), New York:McGraw-Hill Education
+
+<h1>Week 4</h1>
+Topics 11 through 15 complete the foundations of Arduino, and encourage the integration of past learnings to more complex projects as well to extrapolate biggers ideas into custom-built projects. From LCD timers to projects involving the integration of software and firmware, this week’s learnings push students to apply all their skills to-date in more holistic ways, encouraging the use of independent thinking towards building self-imagined sketches and hardware. As in the previous weeks, the learning process remains imbricated as the complexities increase, providing more challenges and more opportunities to create unique sketches and creative outputs.
+
+The following videos document this week’s topics and processes. The accompanying blog entries detail my thoughts, insights, analysis, and code blocks + recommendations (where feasible) on the week’s topic(s). References and bibliographies for all sourced and cited content has been provided at the end of this page:
