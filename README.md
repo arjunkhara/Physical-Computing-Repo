@@ -568,3 +568,102 @@ I progress through this course I am getting more interested in the mechanics of 
 Topic 12 focuses on creating a knock knock lock, which rocks! The primary component in this task is the Piezo being used as an intensity gauge for vibration. These vibrations are registered in a combination, via the sketch, and then fed to a servo motor that turns according to the state of the sketch. Three LEDs provide additional visual confirmation of each state – green for unlocked, yellow for register, and red for locked. The yellow LED in particular has a fascinating function. Just like in JavaScript with Event Listeners that ‘listen’ for mouse clicks or other actions performed on a website, the yellow LED acts as a physical listener for the combination of pre-arranged taps and then hands off to the next state of the sketch. Likewise, the inclusion of Booleans makes perfect sense given the two primary states of locked and unlocked – true and false. I am beginning to understand better the relationships between Booleans, conditional statements, and event listeners, all of which come together within functions and commands to output a specific result. Approached in this context the term ‘physical computing’ resonates deeper.
 
 As a review from the previous projects, piezoelectricity can also be generated simply by walking. When a piezo stack is installed in a shoe or piece of footwear, the motion and contact of the shoe with the ground and up again causes a charge to accumulate within the piezo, thus generating free electricity, albeit in relatively tiny quantities. However, the applications of such technology are far-reaching. It is also interesting to note that the sound produced by the piezo is the result of creating an imbalance in the particles / crystals / material that results in a force of charges, which induces the flow of electricity. The device used in this task is therefore known as a piezo transducer – a vehicle to facilitate piezoelectric charges. The term piezoelectricity comes from the Greek word piezein which literally means to press.
+
+I am getting more confident with the wiring and schematics of the board, so in this task I decided to override the schematics provided in the project book for a configuration that felt right and easier for me. Needless to say I was exceedingly happy to find that this challenge worked and my circuit and sketch performed flawlessly. Apart from the several applications of this task – from combination-driven interactions to noise detectors – what got my attention is the fact that it is not only code that can be rewritten to perform the same functions, but hardware as well. Configurations provided in this book are therefore recommendations but by no means the only way to achieve an end result. These small hacks are incredibly useful for learning and I am encouraged to keep going beyond the curriculum and experiment with my own set of learnings and understanding of physical computing systems. I believe this challenge to go beyond the guidebook and apply my own design is arguably the most critical lesson of this module.
+
+<pre><code>
+/*
+Arduino Week 4 Project 12 
+*/
+
+#include <Servo.h>
+// create an instance of the servo library
+Servo myServo;
+const int piezo = A0;
+const int switchPin = 2;    // switch pin
+const int yellowLed = 3;    // Yellow LED pin
+const int greenLed = 4;    // Green LED pin
+const int redLed = 5;   // Red LED pin
+
+int knockVal;
+int switchVal;
+
+const int quietKnock = 10;
+const int loudKnock = 100;
+
+
+boolean locked = false; // true or false boolean
+int numberOfKnocks = 0;
+
+void setup(){
+myServo.attach(9); // Servo pin
+
+pinMode(yellowLed, OUTPUT);
+pinMode(redLed, OUTPUT);
+pinMode(greenLed, OUTPUT);
+
+pinMode(switchPin, INPUT);
+
+Serial.begin(9600);
+
+digitalWrite(greenLed, HIGH);
+
+myServo.write(0);
+
+Serial.println("the box is unlocked!");
+}
+
+void loop(){
+
+  if(locked == false){
+  switchVal = digitalRead(switchPin);
+  if(switchVal == HIGH){
+  locked = true;
+
+  digitalWrite(greenLed,LOW);
+  digitalWrite(redLed,HIGH);
+  myServo.write(90);
+  Serial.println("the box is locked!");
+  delay (1000);
+    }
+  }
+
+  if(locked == true){
+  knockVal = analogRead(piezo);
+  if(numberOfKnocks < 3 && knockVal > 0){
+  if(checkForKnock(knockVal) == true){
+  numberOfKnocks++;
+      }
+      
+  Serial.print(3 - numberOfKnocks);
+  Serial.println(" more knocks to go");
+    }
+    
+  if(numberOfKnocks >= 3){
+  locked = false;
+  myServo.write(0);
+  delay(20);
+  digitalWrite(greenLed,HIGH);
+  digitalWrite(redLed,LOW);
+  Serial.println("the box is unlocked!");
+    }
+  }
+}
+
+boolean checkForKnock(int value){
+  if(value > quietKnock && value < loudKnock){
+  digitalWrite(yellowLed, HIGH);
+  delay(50);
+  digitalWrite(yellowLed, LOW);
+  Serial.print("Valid knock of value ");
+  Serial.println(value);
+  return true;
+  }
+
+  else {
+  Serial.print("Bad knock value ");
+  Serial.println(value);  
+  return false;
+  }
+}
+</code></pre>
