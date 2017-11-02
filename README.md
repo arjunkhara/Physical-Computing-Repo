@@ -536,3 +536,25 @@ void loop() {
 </code></pre>
 
 This next block of code is to decrement the timer from a value starting at 30000ms (5 minutes). Also, as a quick aside, when writing code within pre tags use ampersandHex60; and ampersandHex62 for opening and closing < >.
+
+<pre><code>
+/*
+Arduino Week 4 Project 11 (Beyond Part 2)
+*/
+
+// linking to the library
+#include <LiquidCrystal.h>
+int timer = 30000; //starts the timer at zero
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+void setup() {
+    lcd.begin(16, 2); //rows of 16 and columns of 2 for the LCD display
+    lcd.print("Your Time is Over");
+}
+
+void loop() {
+  lcd.setCursor(0, 1); //begin display on second line
+  lcd.print(timer);
+  delay (1000); //increments of 1 second
+  timer--; //increment up from zero by value of 1
+}
+</code></pre>
