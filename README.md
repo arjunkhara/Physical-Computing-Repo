@@ -674,7 +674,9 @@ Topic 13 uses capacitance to run a current through the circuit, owing to differe
 
 The project was a success and it got me thinking about its uses as a proximity sensor as well as a materials detector, once I inputted the capacitance of different materials. There is a very interesting article I discovered on the National Center for Biotechnology Information’s PMC journal, which discusses the influence of parasitic capacitance on output voltages, accessible here [+] and describes the relationship between initial and equilibrium charges, expressed by a simultaneous matrix equation, where A, C, and Cp are n × n matrices:
 
-AQ’ + IQp = AQ
+AQ’ + IQp = AQ<br/>
 CQ’ + CpQp = 0
+
 <cite>Kensuke Kanda, Takashi Saito, Yuki Iga, Kohei Higuchi,2 and Kazusuke Maenaka, “Influence of Parasitic Capacitance on Output Voltage for Series-Connected Thin-Film Piezoelectric Devices”, Sensors Basel. National Center for Biotechnology Information, December 4, 2012, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3571804/ (accessed October 31, 2017).</cite>
 
+The applications of parasitic capacitance, with regards to healthcare, is discussed at length in the paper cited above, and this project is a rudimentary but essential introduction to the topic in general. In addition, the idea of a proximity sensor also got me thinking about the use of sound as an indicator, which might prove more useful. I decided therefore to set myself another challenge and see if I could code the Arduino and setup a physical circuit to make this possible, based on everything I have learned so far.
