@@ -341,6 +341,7 @@ void loop() {
 <h1>Topic 7</h1>
 Topic 7 built on the learnings of past week’s topics as well as topic 6 to create a rudimentary piano with four switches, connected in parallel. The switches controlled the current passing through and the voltage was mapped to a set of tones that the Arduino was programmed to emit via the piezo. The setup was straightforward and the result was a success. I was particularly interested in how the frequency of notes related to the sound produced and quickly realised that – within the limitations of the Arduino’s power output (5V) and the space on the breadboard, an entire piano layout could be constructed. But given resource limitations, I decided to use go beyond the basic task required – now that I was more familiar with sound through the Arduino -and decided to reprogram the keys to different frequencies using a conversion chart that can be accessed here: https://sites.google.com/a/bvsd.org/smith-multimedia/programming-arduino
 
+
 By varying the note frequency I was able to compose the rudimentary theme of the Imperial March from Star Wars – a dream for Star Wars fans and a necessary rite of passage for Arduino beginners. The most interesting thing about going beyond the required scope of the task, was the discovery that virtually any sound scale, including the pentatonic scale, can be mapped to the switches and pre-programmed to output that particular note. With more space and more power, one may actually build an entire 88-key piano. This of course is one of several applications, and this particular task drove me to further research sound through Arduino – now a firmly embedded player in my physical computing environment. I have to add I thoroughly enjoyed this project and have included the resources I consulted in the references and bibliography section below. I am planning to use this for the next project, if feasible.
 
 It must be noted that the code provided in the book for this task resulted in an error, which, I am happy to say, I was able to circumnavigate on my own through some trial and error. Basically the error resulted from the int buttons coming up as undefined and so the code block could not execute. I read through the rest of the code and realised that the declaration was redundant any way since the code ran independent of these declarations, given the runtime order was already enclosed in the void loop section of the code. Also, to add more impact to this task, it is easy to connect LEDs to each switch so that when the switch is pressed the sound comes on and the LED lights up. Here is the link to the video for topic 7: https://youtu.be/khOdr-NppUU
@@ -459,7 +460,7 @@ void loop(){
 }
 </code></pre>
 
-Here is the link to the image of the circuit: https://github.com/arjunkhara/physical-computing-repo/blob/master/Piezo-Hourglass.png
+Here is the link to the image of the circuit: ![alt tag](https://github.com/arjunkhara/physical-computing-repo/blob/master/Piezo-Hourglass.png "Topic 8 Additional Challenge Circuit Diagram")
 
 <h1>Topic 9</h1>
 
@@ -503,6 +504,7 @@ The following videos document this week’s topics and processes. The accompanyi
 
 <h1>Topic 11</h1>
 Topic 11 introduces, among other elements, the use of LCDs and for the first time outputs information in the familiar medium of text-based interaction. The LCD in this topic was initially used to output random strings based on the arbitrary motion of the tilt switch. The tilt switch contains a little ball at rest. When moved or shaken the horizontal and vertical positions of the ball cause random pins to fire on cue, thus producing the pre-programmed response of that particular pin to be printed onto the LCD. The effect is likened to that of an 8-Ball or Seer’s Crystal Effect, producing seemingly prophetic responses to any questions asked. The random function is very similar to that used in programmes such as JavaScript to provide a number or hexadecimal colour value when a user clicks for a specific style. The basic project was fine and the results were just as the book was aiming for. However, the possibilities of LCDs with familiar text output warranted a greater urge to delve deeper and conjoin past projects to create something more useful.
+
 
 As a result, I consulted several books and online tutorials and came across an interesting project from Jeremy Blum’s Exploring Arduino book, referenced below. By combining the thrust of Blum’s tutorials with a few other Arduino tutorials (also referenced below) I was able to figure out a simple code that made the LCD output the cardinal series numbers as seconds. This was achieved by first setting a variable, called timer, to zero, then incrementing its value up by one, with a delay between increments of 1000ms, or one second.
 
@@ -720,4 +722,4 @@ delay(10);
 }
 </code></pre>
 
-Here is the circuit diagram for the touchy-feely Piezo. The code block (above) can be changed to a variety of combinations, from the piezo remaining silent till contact is made, to a variety of notes based on contact. I have made a note in the code block above as to where these changes can be made: https://github.com/arjunkhara/physical-computing-repo/blob/master/Piezo-Touchy-Feely.png
+Here is the circuit diagram for the touchy-feely Piezo. The code block (above) can be changed to a variety of combinations, from the piezo remaining silent till contact is made, to a variety of notes based on contact. I have made a note in the code block above as to where these changes can be made: ![alt tag](https://github.com/arjunkhara/physical-computing-repo/blob/master/Piezo-Touchy-Feely.png "Topic 13 Additional Challenge Circuit Diagram")
