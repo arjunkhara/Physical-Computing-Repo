@@ -719,3 +719,5 @@ tone(12, notes[0]); // here you can change the code to make the piezo go silent,
 delay(10);
 }
 </code></pre>
+
+Here is the circuit diagram for the touchy-feely Piezo. The code block (above) can be changed to a variety of combinations, from the piezo remaining silent till contact is made, to a variety of notes based on contact. I have made a note in the code block above as to where these changes can be made: https://github.com/arjunkhara/physical-computing-repo/blob/master/Piezo-Touchy-Feely.png
