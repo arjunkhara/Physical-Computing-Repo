@@ -672,3 +672,9 @@ boolean checkForKnock(int value){
 
 Topic 13 uses capacitance to run a current through the circuit, owing to differences in charges of different materials. The project required setup of an LED, two resistors, and cables connected to pins on the Arduino. Only a ground wire was required for this project since the power to the sensor was coming from digital pin 4. The project also required access to the capacitance library which was more straightforward to link to via the Arduino Web Editor, available here [+]. The project was a success and I tried various materials, from batteries to an aluminium can. However only by touching the wire with my hand was I able to light up the LED, since the difference in charge exceeded the threshold initially set to 1000. If I were to decrease the threshold to 10 or less, the LED would light up more often with different materials.
 
+The project was a success and it got me thinking about its uses as a proximity sensor as well as a materials detector, once I inputted the capacitance of different materials. There is a very interesting article I discovered on the National Center for Biotechnology Information’s PMC journal, which discusses the influence of parasitic capacitance on output voltages, accessible here [+] and describes the relationship between initial and equilibrium charges, expressed by a simultaneous matrix equation, where A, C, and Cp are n × n matrices:
+
+AQ’ + IQp = AQ
+CQ’ + CpQp = 0
+<cite>Kensuke Kanda, Takashi Saito, Yuki Iga, Kohei Higuchi,2 and Kazusuke Maenaka, “Influence of Parasitic Capacitance on Output Voltage for Series-Connected Thin-Film Piezoelectric Devices”, Sensors Basel. National Center for Biotechnology Information, December 4, 2012, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3571804/ (accessed October 31, 2017).</cite>
+
