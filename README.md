@@ -681,4 +681,41 @@ CQ’ + CpQp = 0
 
 The applications of parasitic capacitance, with regards to healthcare, is discussed at length in the paper cited above, and this project is a rudimentary but essential introduction to the topic in general. In addition, the idea of a proximity sensor also got me thinking about the use of sound as an indicator, which might prove more useful. I decided therefore to set myself another challenge and see if I could code the Arduino and setup a physical circuit to make this possible, based on everything I have learned so far.
 
-I set up the circuit and coded the Arduino with help from topic 6 which introduced the Piezo. The challenge, to my delight, worked beautifully and I was able to hold the end of the wire and have the piezo produce a higher tone, val 330. When I let go the piezo reverted to its initial lower tone, val 230. I programmed both of these tones using a conversion chart that is accessible here[+]. I very much enjoyed this project, and have included the resources I consulted in the references and bibliography section below. The use of both sound and light is always an exciting prospect and, as my confidence slowly continues to grow, I am looking forward to moving away from the guide book and assigning myself even more challenging tasks.
+I set up the circuit and coded the Arduino with help from topic 6 which introduced the Piezo. The challenge, to my delight, worked beautifully and I was able to hold the end of the wire and have the piezo produce a higher tone, val 330. When I let go the piezo reverted to its initial lower tone, val 230. I programmed both of these tones using a conversion chart that is accessible here[+]. I very much enjoyed this project, and have included the resources I consulted in the references and bibliography section below. The use of both sound and light is always an exciting prospect and, as my confidence slowly continues to grow, I am looking forward to moving away from the guide book and assigning myself even more challenging tasks. The code block for the additional challenge, as well as the accompanying circuit diagram, are detailed below:
+
+<pre><code>
+
+/*
+Arduino Week 4 Project 13 (Beyond)
+This is the code to use a piezo instead of an LED to play different sounds given the same variables for capacitance connections
+*/
+
+#include 
+
+CapacitiveSensor capSensor = CapacitiveSensor(4,2);
+
+int notes[] = {230, 330}; // change these notes to any value. See this document for corresponding value codes.
+int threshold = 1000;
+int sensorValue;
+const int ledPin = 12;
+
+void setup() {
+Serial.begin(9600);
+pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+long sensorValue = capSensor.capacitiveSensor(30);
+Serial.println(sensorValue); 
+
+if(sensorValue > threshold) {
+tone(12, notes[1]);
+  }
+
+else {
+tone(12, notes[0]); // here you can change the code to make the piezo go silent, for example by adding note 0 as the third item in the int notes array, then calling for that note and appending it here eg notes[2].
+  }
+
+delay(10);
+}
+</code></pre>
