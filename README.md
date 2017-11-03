@@ -667,3 +667,8 @@ boolean checkForKnock(int value){
   }
 }
 </code></pre>
+
+<h1>Topic 13</h1>
+
+Topic 13 uses capacitance to run a current through the circuit, owing to differences in charges of different materials. The project required setup of an LED, two resistors, and cables connected to pins on the Arduino. Only a ground wire was required for this project since the power to the sensor was coming from digital pin 4. The project also required access to the capacitance library which was more straightforward to link to via the Arduino Web Editor, available here [+]. The project was a success and I tried various materials, from batteries to an aluminium can. However only by touching the wire with my hand was I able to light up the LED, since the difference in charge exceeded the threshold initially set to 1000. If I were to decrease the threshold to 10 or less, the LED would light up more often with different materials.
+
