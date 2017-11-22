@@ -268,3 +268,7 @@ void loop() {
 }
 </code></pre>
 
+<h3>PUZZLE BOX: MATERIALS AND DIMENSIONS</h3>
+Below are the materials and dimensions used to build the housing frame and attachments for the puzzle box.
+![alt tag](https://www.nano.training/wp-content/uploads/2017/11/MA-Puzzle-Box.png "Materials List and Diagram of Parts for the Box")
+
