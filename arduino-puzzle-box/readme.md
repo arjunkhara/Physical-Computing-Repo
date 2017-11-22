@@ -27,3 +27,204 @@ Once the basic mechanism of the box was sorted, I wanted to give the project uti
 <h3>PUZZLE BOX: LASER CUTTING AND 3D PRINTING</h3>
 I was tempted to use a cardboard box for this project as it seemed the easiest solution, but the idea of keeping this box beyond the classroom or project necessitated a more permanent solution. I therefore researched more on the acrylics available at the College’s computer lab, and discovered the properties of light polarisation, which was sufficient motivation to build the entire puzzle box from laser-cut acrylic. Plus, what’s the point of a Star Wars themed box that does not use lasers? I first prototyped by box out of paper; with the dimensions set and positions of holes, battery holders, and container depth set, I moved on to cutting the actual box with orange acrylic — also the colour of Sith lightsabers, together with its embellishments in a deep purple — a popular colour of lightsaber blades for the Jedi. With the box done, I also cut out the lid. However, the weight of the acrylic, light though it is, was too much even for two servo motors. I proceeded to cut out gears to make turning easier but the servo motors in the standard Arduino kit lack sufficient power to lift anything slightly heavier than cardboard. I therefore created my box cover by 3D printing a lid and manually cutting it along its contours so that it would not interfere with the servo motors. Once I acquire stronger servo motors, I will swap out the 3D-printed lid with the original acrylic design, and attach the gears to the mechanism for further lifting strength.
 
+<pre><code>
+/*Arduino Puzzle Box Part 1: (Code for the Puzzle Box)*/
+/*LIBRARY SOURCE FOR THIS PROJECT: ARDUINO COMMUNITY FORUM 423364.0*/
+/*NOTE: While the variable names have been changed to align with my understanding, the underlying code structure and knowledge that I have gained and used here have been sourced from the Arduino Community Forum 423364.0 and listed in the reference section, together with the other books, websites, and video tutorials that I consulted in figuring out how to make this project work.*/ 
+
+#include 
+#include 
+Servo servo1;
+Servo servo2;
+int servopos = 0;
+int pzPin = 8;
+
+long XaxisForce, YaxisForce, ZaxisForce;
+long XgyroF, YgyroF, ZgyroF;
+float currentY; //let the serial monitor know if motion is detected
+float XgyroForce, YgyroForce, ZgyroForce;
+float XrotationForce, YrotationForce, ZrotationForce;
+
+/*EXCODE*/
+int xval=A4;
+int yval=A5;
+int out1=11; //red LED
+int out2=12; //green LED
+int out3=13; //green LED
+
+void setup() {
+  servo1.attach(3);
+  servo1.write(90);
+ servo2.attach(5);
+  servo2.write(90);
+  servo1.write(0);
+  servo2.write(180);
+  
+  Serial.begin(9600);
+  Wire.begin();
+  setupMPU();
+  
+  /*EXCODE*/
+  pinMode(xval,INPUT);
+  pinMode(yval,INPUT);
+  pinMode(out1,OUTPUT);
+  pinMode(out2,OUTPUT);
+  pinMode(out3,OUTPUT);
+  
+  digitalWrite(out1,LOW);
+  digitalWrite(out2,LOW);
+  digitalWrite(out3,LOW);
+}
+
+void loop() {
+  YaxisForce = float(accelY);
+  currentY = YaxisForce;
+  recordAccelRegisters();
+  recordGyroRegisters();
+  printData();
+  delay(333);
+  
+  /*EXCODE*/
+  int xPin=analogRead(xval);
+  int yPin=analogRead(yval);
+  //Serial.println(xval); // bug testing
+  //Serial.println(yval); // bug testing
+  
+  if (XgyroForce >= 0.30){ //red
+    digitalWrite(out1,HIGH);  
+    tone(pzPin, 440, 800);
+  }
+  
+  if (YgyroForce >= 0.30){ //red
+    digitalWrite(out2,HIGH);  
+    tone(pzPin, 349, 800);
+  }
+  
+  if (XgyroForce <= -0.30){ //red
+    digitalWrite(out3,HIGH);  
+    tone(pzPin, 523, 800);
+  }
+    
+  if (out1 == HIGH && out2 == HIGH && out3 == HIGH){
+    //OPEN SERVO DOORS
+    for(servopos = 0; servopos < 93; servopos++){
+    servo1.write(88);
+    delay(30);
+    servo2.write(58); //make servo2 spin in phase opposites to servo1
+    delay(30);
+    }
+    //OPEN SERVO DOORS
+    
+     //PLAY TONES
+    tone(pzPin, 440, 800);
+    delay(800);
+    tone(pzPin, 440, 800);
+    delay(800);
+    tone(pzPin, 440, 800);
+    delay(800);
+    tone(pzPin, 349, 800);
+    delay(800);
+    tone(pzPin, 523, 600);
+    delay(300);
+    tone(pzPin, 440, 800);
+    delay(800);
+    tone(pzPin, 349, 800);
+    delay(800);
+    tone(pzPin, 523, 600);
+    delay(300);
+    tone(pzPin, 440, 800);
+    delay(800);
+    //PLAY TONES
+    
+  } else if (out1 == LOW && out2 == LOW && out3 == LOW){ //green
+    digitalWrite(out1,LOW); 
+    digitalWrite(out2,LOW); 
+    digitalWrite(out3,LOW); 
+    //CLOSE SERVO DOORS
+    for(servopos <= 93; servopos > 0; servopos--){
+    servo1.write(0);
+    delay(30);
+    servo2.write(180);
+    delay(30);
+    }
+    //CLOSE SERVO DOORS
+    
+    } else if (XgyroForce < 0.30 && XgyroForce > -0.30 ){  //blue LED test condition
+    Serial.println("I AM working"); //blue LED test results
+    
+    }else{
+    Serial.println("I am outside the range");
+    }
+}
+  
+/*LIBRARY SOURCE: ARDUINO COMMUNITY FORUM 423364.0*/
+
+void setupMPU(){
+  Wire.beginTransmission(0b1101000); //This is the I2C address of the MPU (b1101000/b1101001 for AC0 low/high datasheet sec. 9.2)
+  Wire.write(0x6B); //Accessing the register 6B - Power Management (Sec. 4.28)
+  Wire.write(0b00000000); //Setting SLEEP register to 0. (Required; see Note on p. 9)
+  Wire.endTransmission();  
+  Wire.beginTransmission(0b1101000); //I2C address of the MPU
+  Wire.write(0x1B); //Accessing the register 1B - Gyroscope Configuration (Sec. 4.4) 
+  Wire.write(0x00000000); //Setting the gyro to full scale +/- 250deg./s 
+  Wire.endTransmission(); 
+  Wire.beginTransmission(0b1101000); //I2C address of the MPU
+  Wire.write(0x1C); //Accessing the register 1C - Acccelerometer Configuration (Sec. 4.5) 
+  Wire.write(0b00000000); //Setting the accel to +/- 2g
+  Wire.endTransmission(); 
+}
+
+void recordAccelRegisters() {
+  Wire.beginTransmission(0b1101000); //I2C address of the MPU
+  Wire.write(0x3B); //Starting register for Accel Readings
+  Wire.endTransmission();
+  Wire.requestFrom(0b1101000,6); //Request Accel Registers (3B - 40)
+  while(Wire.available() < 6);
+  XaxisForce = Wire.read()<<8|Wire.read(); //Store first two bytes into XaxisForce
+  YaxisForce = Wire.read()<<8|Wire.read(); //Store middle two bytes into YaxisForce
+  ZaxisForce = Wire.read()<<8|Wire.read(); //Store last two bytes into ZaxisForce
+  processAccelData();
+}
+
+void processAccelData(){
+  XgyroForce = XaxisForce / 16384.0;
+  YgyroForce = YaxisForce / 16384.0; 
+  ZgyroForce = ZaxisForce / 16384.0;
+}
+
+void recordGyroRegisters() {
+  Wire.beginTransmission(0b1101000); //I2C address of the MPU
+  Wire.write(0x43); //Starting register for Gyro Readings
+  Wire.endTransmission();
+  Wire.requestFrom(0b1101000,6); //Request Gyro Registers (43 - 48)
+  while(Wire.available() < 6);
+  XgyroForce = Wire.read()<<8|Wire.read(); //Store first two bytes into XaxisForce
+  YgyroForce = Wire.read()<<8|Wire.read(); //Store middle two bytes into YaxisForce
+  ZgyroForce = Wire.read()<<8|Wire.read(); //Store last two bytes into ZaxisForce
+  processGyroData();
+}
+
+void processGyroData() {
+  XrotationForce = XgyroF / 131.0;
+  YrotationForce = YgyroF / 131.0; 
+  ZrotationForce = ZgyroF / 131.0;
+}
+
+void printData() {
+  //Serial.print("Gyro (deg)");
+  //Serial.print(" X=");
+  //Serial.print(XrotationForce);
+  //Serial.print(" Y=");
+  //Serial.print(YrotationForce);
+  //Serial.print(" Z=");
+  //Serial.print(ZrotationForce);
+  //Serial.print(" Accel (g)");
+  Serial.print(" X=");
+  Serial.print(XgyroForce);
+  Serial.print(" Y=");
+  Serial.print(YgyroForce);
+  //Serial.print(" Z=");
+  //Serial.println(ZgyroForce);
+}
+</code></pre>
+
