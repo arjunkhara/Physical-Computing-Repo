@@ -27,6 +27,9 @@ Once the basic mechanism of the box was sorted, I wanted to give the project uti
 <h3>PUZZLE BOX: LASER CUTTING AND 3D PRINTING</h3>
 I was tempted to use a cardboard box for this project as it seemed the easiest solution, but the idea of keeping this box beyond the classroom or project necessitated a more permanent solution. I therefore researched more on the acrylics available at the College’s computer lab, and discovered the properties of light polarisation, which was sufficient motivation to build the entire puzzle box from laser-cut acrylic. Plus, what’s the point of a Star Wars themed box that does not use lasers? I first prototyped by box out of paper; with the dimensions set and positions of holes, battery holders, and container depth set, I moved on to cutting the actual box with orange acrylic — also the colour of Sith lightsabers, together with its embellishments in a deep purple — a popular colour of lightsaber blades for the Jedi. With the box done, I also cut out the lid. However, the weight of the acrylic, light though it is, was too much even for two servo motors. I proceeded to cut out gears to make turning easier but the servo motors in the standard Arduino kit lack sufficient power to lift anything slightly heavier than cardboard. I therefore created my box cover by 3D printing a lid and manually cutting it along its contours so that it would not interfere with the servo motors. Once I acquire stronger servo motors, I will swap out the 3D-printed lid with the original acrylic design, and attach the gears to the mechanism for further lifting strength.
 
+
+<h3>PUZZLE BOX: CODE PART 1</h3>
+Below is the code and circuit diagram for the puzzle box, with the accelerometer, servo motors, LEDs, and Piezo speaker.
 <pre><code>
 /*Arduino Puzzle Box Part 1: (Code for the Puzzle Box)*/
 /*LIBRARY SOURCE FOR THIS PROJECT: ARDUINO COMMUNITY FORUM 423364.0*/
@@ -225,6 +228,43 @@ void printData() {
   Serial.print(YgyroForce);
   //Serial.print(" Z=");
   //Serial.println(ZgyroForce);
+}
+</code></pre>
+
+
+<h3>PUZZLE BOX: CODE PART 2</h3>
+Below is the code and circuit diagram for the sound sensor and corresponding flashing lights, built on the second Arduino board.
+<pre><code>
+/*Arduino Puzzle Box Part 2: (Code for the Sound Sensor)*/
+int led1 = 13;
+int led2 = 12;
+int led3 = 11;
+int led4 = 10;
+int threshold = 80; //DO NOT Change This (configured)
+int volume; //To be read by the microphone
+
+void setup() {                
+    Serial.begin(9600); // For debugging
+    pinMode(led1, OUTPUT);    
+    pinMode(led2, OUTPUT); 
+    pinMode(led3, OUTPUT);
+    pinMode(led4, OUTPUT); 
+}
+
+void loop() {
+    volume = analogRead(A0); // Reads the value from the Analog PIN A0
+
+  if(volume >= threshold){
+    digitalWrite(led1, HIGH); //Turn ON RED Led
+    digitalWrite(led2, HIGH); //Turn ON RED Led
+    digitalWrite(led3, HIGH); //Turn ON RED Led
+    digitalWrite(led4, HIGH); //Turn ON RED Led
+  } else {
+    digitalWrite(led1, LOW); //Turn OFF RED Led
+    digitalWrite(led2, LOW); //Turn OFF RED Led
+    digitalWrite(led3, LOW); //Turn OFF RED Led
+    digitalWrite(led4, LOW); //Turn OFF RED Led
+  }
 }
 </code></pre>
 
