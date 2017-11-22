@@ -275,3 +275,35 @@ Below are the materials and dimensions used to build the housing frame and attac
 <h3>PUZZLE BOX: CONCLUDING THOUGHTS</h3>
 Building this puzzle box has given me plenty more food for thought when approaching physical computing as both a serious subject and a regular hobby. The idea, that everything human beings utilise on a daily basis across society is designed, is impossible to appreciate without building something with significant manufacturing input. From the lamps in our bedrooms to the machines that lift and drop elevators to the treadmills in the gym and the automatic bus doors that swing open and shut, everything has been designed and carefully manufactured. The process of building this puzzle box, modest by comparison, nonetheless runs along these tracks. The prevalence of sensors, actuators, motors, and drivers in our society is blindingly powerful once we begin to see the world through this lens. The quiet development of the Internet of Things vis-à-vis the Internet of Information, is a silent nod towards the importance of physical computing and its yet untapped effect on society. What can we say of the twenty billion devices waiting to network with each other? or indeed of the immense neural-like network these devices will form? Yorick Wilks talks about 'get[ting] to a more people-friendly web precisely by making it machine-friendly, by realising Berner-Lee's original vision of a web that machines themselves understand.' (Wilks 2014, p.372). Wilks is referring here to semantic and other machine-learning capabilities being deployed across the Internet, which are revolutionising information-sharing beyond our wildest dreams. Yet the significance of the future is best encapsulated not in the vast imaginations of tomorrow, but in the little changes that power the world each day, and each day bring our world closer to that truly puzzling notion of a utopian society that our species has consistently endeavoured towards ever since we first emerged onto this existence.
 
+
+<h3>PUZZLE BOX: REFERENCES AND BIBLIOGRAPHY</h3>
+
+• Arduino Community Forum, Arduino (2017) on Arduino Website (accessed November 2017) at https://forum.arduino.cc/index.php?topic=353524.0
+
+• Arduino Community Forum, Arduino (2017) on Arduino Website (accessed November 2017) at https://forum.arduino.cc/index.php?topic=423364.0
+
+• Arduino Stackexchange, Stack Exchange (2017) on Stack Exchange Website (accessed November 2017) at https://arduino.stackexchange.com/questions/1667/significance-of-the-numbers-used-in-the-manual
+
+• Arduino Tutorials, Arduino (2017) on Arduino Website (accessed November 2017) at www.arduino.cc
+
+• Beginning C++ Through Game Programming, Dawson, M (2015), United States of America:Cengage Learning
+
+• Beyond the Internet and Web, in Society & The Internet, Wilks, Y., eds. Graham, M. and Dutton, W.H., (2014), Oxford: Oxford University Press
+
+• Calibration and Programming (2017) on Adafruit Website (accessed November 2017) at https://learn.adafruit.com/adafruit-analog-accelerometer-breakouts/programming
+
+• Exploring Arduino: Tools and Techniques for Engineering Wizardry, Blum, J. (2013), Indiana: John Wiley & Sons
+
+• Games, Design and Play, A Detailed Approach to Iterative Game Design, Macklin, C and Sharp, J. (2016), New York: Addison-Wesley
+
+• Grove — 3-Axis Analog Accelerometer (2017) on SEEED Website (accessed November 2017) at http://wiki.seeed.cc/Grove-3-Axis_Analog_Accelerometer/
+
+• Influence of Parasitic Capacitance on Output Voltage for Series-Connected Thin-Film Piezoelectric Devices, Kensuke Kanda, Takashi Saito, Yuki Iga, Kohei Higuchi,2 and Kazusuke Maenaka (2012) on Sensors Basel. National Center for Biotechnology Information (accessed October 2017) at https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3571804/
+
+• Piezoelectricity, Explain That Stuff (2017) on Explain That Stuff Website (accessed October 2017) at http://www.explainthatstuff.com/piezoelectricity.html
+
+• Practical Electronics for Inventors (4th Edition), Scherz, P. and Monk, S. (2016), New York:McGraw-Hill Education
+
+• Programming Arduino, Manhattan Middle School Multimedia Class (2017) on Google Sites (accessed October 2017) at https://sites.google.com/a/bvsd.org/smith-multimedia/programming-arduino
+
+• Sound Detector Hookup Guide, Byron J. (2017) on SparkFun (accessed November 2017) at https://learn.sparkfun.com/tutorials/sound-detector-hookup-guide
