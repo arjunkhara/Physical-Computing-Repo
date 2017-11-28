@@ -233,7 +233,7 @@ void printData() {
 
 <h3>PUZZLE BOX: CIRCUIT DIAGRAM PART 1 (ACCELEROMETER)</h3>
 This is the circuit diagram for the accelerometer for the Puzzle Box:
-![alt tag]( "Accelerometer Circuit Diagram")
+![alt tag](https://github.com/arjunkhara/physical-computing-repo/blob/master/arduino-puzzle-box/Accelerometer-Circuit-Diagram.jpg "Accelerometer Circuit Diagram")
 
 <h3>PUZZLE BOX: CODE PART 2</h3>
 Below is the code and circuit diagram for the sound sensor and corresponding flashing lights, built on the second Arduino board.
@@ -272,8 +272,13 @@ void loop() {
 </code></pre>
 
 <h3>PUZZLE BOX: CIRCUIT DIAGRAM PART 2 (SOUND SENSOR)</h3>
-This is the circuit diagram for the accelerometer for the Puzzle Box:
-![alt tag]( "Sound Sensor Circuit Diagram")
+This is the circuit diagram for the sound sensor for the Puzzle Box:
+![alt tag](https://github.com/arjunkhara/physical-computing-repo/blob/master/arduino-puzzle-box/Sound-Sensor-Circuit-Diagram.jpg "Accelerometer Circuit Diagram")
+
+
+<h3>PUZZLE BOX: INTER-INTEGRATED CIRCUIT (I2C)</h3>
+To make two Arduinos work with each other requires that both motherboards connect according to the I2C protocol. While complex in its nature and operability, the connectivity between two independent motherboards as one integrated platform requires that the A4 and A5 pins on each of the Arduino boards be connected to each other, in the same order (i.e. A4 to A4, and A5 to A5). These are the serial data lines and the serial clock lines. The ground pins on each board must also connect to each other in the manner discussed above. Once this has been achieved, code is required for the two Arduinos to understand their hierarchy: one is the master board and the other the slave board. In this case the Wire.h library is essential. This project, in the end, did not require this relationship but I was happy that I managed to experiment with this setup, which I can see has many more complex applications. The circuit diagram for this experiment is provided below: ![alt tag](https://github.com/arjunkhara/physical-computing-repo/blob/master/arduino-puzzle-box/Two-Arduinos-Connected.jpg "Accelerometer Circuit Diagram")
+
 
 <h3>PUZZLE BOX: MATERIALS AND DIMENSIONS</h3>
 Below are the materials and dimensions used to build the housing frame and attachments for the puzzle box. ![alt tag](https://github.com/arjunkhara/physical-computing-repo/blob/master/arduino-puzzle-box/MA-Puzzle-Box.png "Materials List and Diagram of Parts for the Box")
@@ -305,6 +310,8 @@ Building this puzzle box has given me plenty more food for thought when approach
 • Grove — 3-Axis Analog Accelerometer (2017) on SEEED Website (accessed November 2017) at http://wiki.seeed.cc/Grove-3-Axis_Analog_Accelerometer/
 
 • Influence of Parasitic Capacitance on Output Voltage for Series-Connected Thin-Film Piezoelectric Devices, Kensuke Kanda, Takashi Saito, Yuki Iga, Kohei Higuchi,2 and Kazusuke Maenaka (2012) on Sensors Basel. National Center for Biotechnology Information (accessed October 2017) at https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3571804/
+
+• I2C Between Arduinos by cornelam (2017) on Instructables Website (accessed November 2017) at http://www.instructables.com/id/I2C-between-Arduinos/
 
 • Piezoelectricity, Explain That Stuff (2017) on Explain That Stuff Website (accessed October 2017) at http://www.explainthatstuff.com/piezoelectricity.html
 
