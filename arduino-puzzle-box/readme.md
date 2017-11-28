@@ -271,7 +271,9 @@ void loop() {
 }
 </code></pre>
 
-
+<h3>PUZZLE BOX: CIRCUIT DIAGRAM PART 2 (SOUND SENSOR)</h3>
+This is the circuit diagram for the accelerometer for the Puzzle Box:
+![alt tag]( "Sound Sensor Circuit Diagram")
 
 <h3>PUZZLE BOX: MATERIALS AND DIMENSIONS</h3>
 Below are the materials and dimensions used to build the housing frame and attachments for the puzzle box. ![alt tag](https://github.com/arjunkhara/physical-computing-repo/blob/master/arduino-puzzle-box/MA-Puzzle-Box.png "Materials List and Diagram of Parts for the Box")
