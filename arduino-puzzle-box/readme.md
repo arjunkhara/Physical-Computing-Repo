@@ -231,6 +231,9 @@ void printData() {
 }
 </code></pre>
 
+<h3>PUZZLE BOX: CIRCUIT DIAGRAM PART 1 (ACCELEROMETER)</h3>
+This is the circuit diagram for the accelerometer for the Puzzle Box:
+![alt tag]( "Accelerometer Circuit Diagram")
 
 <h3>PUZZLE BOX: CODE PART 2</h3>
 Below is the code and circuit diagram for the sound sensor and corresponding flashing lights, built on the second Arduino board.
@@ -267,6 +270,8 @@ void loop() {
   }
 }
 </code></pre>
+
+
 
 <h3>PUZZLE BOX: MATERIALS AND DIMENSIONS</h3>
 Below are the materials and dimensions used to build the housing frame and attachments for the puzzle box. ![alt tag](https://github.com/arjunkhara/physical-computing-repo/blob/master/arduino-puzzle-box/MA-Puzzle-Box.png "Materials List and Diagram of Parts for the Box")
