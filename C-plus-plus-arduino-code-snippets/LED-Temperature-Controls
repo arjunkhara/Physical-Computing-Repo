@@ -1,0 +1,60 @@
+/*
+ Arduino Week 1 Project 4 (Beyond)
+ */
+
+/*
+LED and temperature sensor setup (custom project combining topics 3 and 4) 
+Special thanks to Jeremy Blum, author of Exploring Arduino, for the tutorial on the basic code base for this project.
+*/
+
+const int blueLED = 9;
+const int greenLED = 10;
+const int redLED = 11;
+const int sensorPin = A0;
+const float baselineTemp = 17.0;
+
+const int LOWER_BOUND = 156;
+const int UPPER_BOUND = 163;
+
+int sensorVal = 0;
+
+void setup() {
+  Serial.begin(9600); //serial port with baud rate set
+for(int pinNumber = 9; pinNumber<12; pinNumber++){
+  pinMode(pinNumber,OUTPUT);
+  digitalWrite(pinNumber, LOW);
+  //above for loop similar to Javascript for and while loops
+}
+  
+    pinMode (blueLED, OUTPUT);
+    pinMode (greenLED, OUTPUT);
+    pinMode (redLED, OUTPUT);
+}
+
+void loop() {
+   int sensorVal = analogRead(sensorPin);
+    Serial.print("Sensor Value: ");
+    Serial.print(sensorVal);
+    float voltage = (sensorVal/1024.0) * 5.0;
+    Serial.print(", Volts: ");
+    Serial.print(voltage);
+    Serial.print(", degrees C: ");
+    float temperature = (voltage - .5) * 100;
+    Serial.println(temperature);
+    
+    //begin conditional statement
+    
+    if(sensorVal < LOWER_BOUND) {
+      digitalWrite (redLED, LOW);
+      digitalWrite (greenLED, HIGH);
+      digitalWrite (blueLED, LOW);
+    } else if (sensorVal > UPPER_BOUND){
+      digitalWrite (redLED, HIGH);
+      digitalWrite (greenLED, LOW);
+      digitalWrite (blueLED, LOW);
+    } else {
+      digitalWrite (redLED, LOW);
+      digitalWrite (greenLED, LOW);
+      digitalWrite (blueLED, HIGH);
+    }
+}
