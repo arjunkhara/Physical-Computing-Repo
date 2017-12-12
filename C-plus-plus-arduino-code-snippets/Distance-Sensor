@@ -1,0 +1,38 @@
+/*
+Distance Sensor Sketch
+*/
+
+int trigPin = 7;
+int echoPin = 6;
+int ledR = 12;
+
+int laserPin = 8;
+
+void setup() {
+    Serial.begin(9600);
+    pinMode (ledR, OUTPUT);
+    pinMode (trigPin, OUTPUT);
+    pinMode (echoPin, INPUT);
+    pinMode(laserPin, OUTPUT);
+}
+
+void loop() {
+    long duration, distance;
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(trigPin, LOW);
+    duration=pulseIn(echoPin, HIGH);
+    distance= (duration/2)/29.1;
+    Serial.print(distance);
+    Serial.println("CM");
+    delay(10);
+    
+    if((distance <=10)){
+    digitalWrite(ledR, LOW); 
+    digitalWrite(laserPin, HIGH);
+    }
+    else{
+      digitalWrite(ledR, HIGH);
+      digitalWrite(laserPin, LOW);
+    }
+}
