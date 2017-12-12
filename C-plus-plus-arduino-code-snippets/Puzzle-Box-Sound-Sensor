@@ -1,0 +1,36 @@
+int led1 = 13;
+int led2 = 12;
+int led3 = 11;
+int led4 = 10;
+int threshold = 80; //DO NOT Change This (configured)
+int volume; //To be read by the microphone
+
+void setup() {                
+    Serial.begin(9600); // For debugging
+    pinMode(led1, OUTPUT);    
+    pinMode(led2, OUTPUT); 
+    pinMode(led3, OUTPUT);
+    pinMode(led4, OUTPUT); 
+}
+
+void loop() {
+    volume = analogRead(A0); // Reads the value from the Analog PIN A0
+  
+  /*
+  //Debug mode
+  Serial.println(volume);
+  delay(100);
+  */
+  
+  if(volume >= threshold){
+    digitalWrite(led1, HIGH); //Turn ON RED Led
+    digitalWrite(led2, HIGH); //Turn ON RED Led
+    digitalWrite(led3, HIGH); //Turn ON RED Led
+    digitalWrite(led4, HIGH); //Turn ON RED Led
+  } else {
+    digitalWrite(led1, LOW); //Turn OFF RED Led
+    digitalWrite(led2, LOW); //Turn OFF RED Led
+    digitalWrite(led3, LOW); //Turn OFF RED Led
+    digitalWrite(led4, LOW); //Turn OFF RED Led
+  }
+}
