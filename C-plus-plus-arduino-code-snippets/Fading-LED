@@ -1,0 +1,50 @@
+/*
+ Arduino Week 1 Project 2
+ */
+ 
+int switchState = 0;
+int led = 3;           // the PWM pin the LED is attached to (i.e the green LED)
+int brightness = 0;    // how bright the LED is
+int fadeAmount = 5;    // how many points to fade the LED by
+
+
+void setup() {
+  // put your setup code here, to run once:
+pinMode(3,OUTPUT);
+pinMode(4,OUTPUT);
+pinMode(5,OUTPUT);
+pinMode(2,INPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+   analogWrite(led, brightness);
+
+  // change the brightness for next time through the loop:
+  brightness = brightness + fadeAmount;
+
+  // reverse the direction of the fading at the ends of the fade:
+  if (brightness <= 0 || brightness >= 255) {
+    fadeAmount = -fadeAmount;
+  }
+  // wait for 30 milliseconds to see the dimming effect
+  delay(30);
+  
+switchState = digitalRead(2);
+if (switchState == LOW) {
+  digitalWrite(3, HIGH); //the green LED
+  digitalWrite(4, LOW); //the first red LED
+  digitalWrite(5, LOW); //the second red LED
+
+} 
+else {
+  digitalWrite(3, LOW); //the green LED
+  digitalWrite(4, LOW); //the first red LED
+  digitalWrite(5, HIGH); //the second red LED
+
+  delay(250);
+  digitalWrite(4, HIGH); //the first red LED
+  digitalWrite(5, LOW); //the second red LED
+  delay(250);
+}
+}
