@@ -1,0 +1,197 @@
+#include <Wire.h>
+#include <Servo.h>
+Servo servo1;
+Servo servo2;
+int servopos = 0;
+int pzPin = 8;
+
+
+long accelX, accelY, accelZ;
+float currentY;
+float gForceX, gForceY, gForceZ;
+
+long gyroX, gyroY, gyroZ;
+float rotX, rotY, rotZ;
+
+/*EXCODE*/
+int xval=A4;
+int yval=A5;
+int out1=11; //red LED
+int out2=12; //green LED
+int out3=13; //green LED
+
+
+void setup() {
+  servo1.attach(3);
+  servo1.write(90);
+ servo2.attach(5);
+  servo2.write(90);
+  servo1.write(0);
+  servo2.write(180);
+  
+  Serial.begin(9600);
+  Wire.begin();
+  setupMPU();
+  
+  /*EXCODE*/
+  pinMode(xval,INPUT);
+  pinMode(yval,INPUT);
+  pinMode(out1,OUTPUT);
+  pinMode(out2,OUTPUT);
+  pinMode(out3,OUTPUT);
+  
+  digitalWrite(out1,LOW);
+  digitalWrite(out2,LOW);
+  digitalWrite(out3,LOW);
+}
+
+
+void loop() {
+  accelY = float(accelY);
+  currentY = accelY;
+  recordAccelRegisters();
+  recordGyroRegisters();
+  printData();
+  delay(333);
+  
+  /*EXCODE*/
+  int xPin=analogRead(xval);
+  int yPin=analogRead(yval);
+  //Serial.println(xval); // bug testing
+  //Serial.println(yval); // bug testing
+  
+  if (gForceX >= 0.30){ //red
+    digitalWrite(out1,HIGH);  
+    tone(pzPin, 440, 800);
+  }
+  
+  if (gForceY >= 0.30){ //red
+    digitalWrite(out2,HIGH);  
+    tone(pzPin, 349, 800);
+  }
+  
+  if (gForceY <= -0.30){ //red
+    digitalWrite(out3,HIGH);  
+    tone(pzPin, 523, 800);
+  }
+    
+  if (gForceX >= 0.45){
+    //OPEN SERVO DOORS
+    for(servopos = 0; servopos < 93; servopos++){
+    servo1.write(88);
+    delay(30);
+    servo2.write(58); //make servo2 spin in phase opposites to servo1
+    delay(30);
+    }
+    //OPEN SERVO DOORS
+    
+     //PLAY TONES
+    tone(pzPin, 440, 800);
+    delay(800);
+    tone(pzPin, 440, 800);
+    delay(800);
+    tone(pzPin, 440, 800);
+    delay(800);
+    tone(pzPin, 349, 800);
+    delay(800);
+    tone(pzPin, 523, 600);
+    delay(300);
+    tone(pzPin, 440, 800);
+    delay(800);
+    tone(pzPin, 349, 800);
+    delay(800);
+    tone(pzPin, 523, 600);
+    delay(300);
+    tone(pzPin, 440, 800);
+    delay(800);
+    //PLAY TONES
+    
+  } else if (gForceX <= -0.30){ //green
+    digitalWrite(out1,LOW); 
+    digitalWrite(out2,LOW); 
+    digitalWrite(out3,LOW); 
+    //CLOSE SERVO DOORS
+    for(servopos <= 93; servopos > 0; servopos--){
+    servo1.write(0);
+    delay(30);
+    servo2.write(180);
+    delay(30);
+    }
+    //CLOSE SERVO DOORS
+    
+    } else if (gForceX < 0.30 && gForceX > -0.30 ){ //blue
+    Serial.println("I AM working");
+    
+    }else{
+    Serial.println("I am outside the range");
+    }
+}
+  
+
+void setupMPU(){
+  Wire.beginTransmission(0b1101000); //This is the I2C address of the MPU (b1101000/b1101001 for AC0 low/high datasheet sec. 9.2)
+  Wire.write(0x6B); //Accessing the register 6B - Power Management (Sec. 4.28)
+  Wire.write(0b00000000); //Setting SLEEP register to 0. (Required; see Note on p. 9)
+  Wire.endTransmission();  
+  Wire.beginTransmission(0b1101000); //I2C address of the MPU
+  Wire.write(0x1B); //Accessing the register 1B - Gyroscope Configuration (Sec. 4.4) 
+  Wire.write(0x00000000); //Setting the gyro to full scale +/- 250deg./s 
+  Wire.endTransmission(); 
+  Wire.beginTransmission(0b1101000); //I2C address of the MPU
+  Wire.write(0x1C); //Accessing the register 1C - Acccelerometer Configuration (Sec. 4.5) 
+  Wire.write(0b00000000); //Setting the accel to +/- 2g
+  Wire.endTransmission(); 
+}
+
+void recordAccelRegisters() {
+  Wire.beginTransmission(0b1101000); //I2C address of the MPU
+  Wire.write(0x3B); //Starting register for Accel Readings
+  Wire.endTransmission();
+  Wire.requestFrom(0b1101000,6); //Request Accel Registers (3B - 40)
+  while(Wire.available() < 6);
+  accelX = Wire.read()<<8|Wire.read(); //Store first two bytes into accelX
+  accelY = Wire.read()<<8|Wire.read(); //Store middle two bytes into accelY
+  accelZ = Wire.read()<<8|Wire.read(); //Store last two bytes into accelZ
+  processAccelData();
+}
+
+void processAccelData(){
+  gForceX = accelX / 16384.0;
+  gForceY = accelY / 16384.0; 
+  gForceZ = accelZ / 16384.0;
+}
+
+void recordGyroRegisters() {
+  Wire.beginTransmission(0b1101000); //I2C address of the MPU
+  Wire.write(0x43); //Starting register for Gyro Readings
+  Wire.endTransmission();
+  Wire.requestFrom(0b1101000,6); //Request Gyro Registers (43 - 48)
+  while(Wire.available() < 6);
+  gyroX = Wire.read()<<8|Wire.read(); //Store first two bytes into accelX
+  gyroY = Wire.read()<<8|Wire.read(); //Store middle two bytes into accelY
+  gyroZ = Wire.read()<<8|Wire.read(); //Store last two bytes into accelZ
+  processGyroData();
+}
+
+void processGyroData() {
+  rotX = gyroX / 131.0;
+  rotY = gyroY / 131.0; 
+  rotZ = gyroZ / 131.0;
+}
+
+void printData() {
+  //Serial.print("Gyro (deg)");
+  //Serial.print(" X=");
+  //Serial.print(rotX);
+  //Serial.print(" Y=");
+  //Serial.print(rotY);
+  //Serial.print(" Z=");
+  //Serial.print(rotZ);
+  //Serial.print(" Accel (g)");
+  Serial.print(" X=");
+  Serial.print(gForceX);
+  Serial.print(" Y=");
+  Serial.print(gForceY);
+  //Serial.print(" Z=");
+  //Serial.println(gForceZ);
+}
