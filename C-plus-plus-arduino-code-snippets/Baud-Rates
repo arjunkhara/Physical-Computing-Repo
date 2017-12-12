@@ -1,0 +1,18 @@
+/*
+ Arduino Week 3 Project 14
+ */
+ 
+ const byte potPin = A0;
+ const int baudRate = 4800;
+
+void setup() {
+  // initialize serial communication
+  Serial.begin(baudRate);
+}
+
+void loop() {
+  // read the value of A0, divide by 4 and 
+  // send it as a byte over the serial connection
+  Serial.println(analogRead(potPin)/4);
+  delay(100);
+}
