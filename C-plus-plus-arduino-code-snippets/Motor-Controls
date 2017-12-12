@@ -1,0 +1,25 @@
+/*
+ Arduino Week 2 Project 9
+ */
+
+const int switchPin = 2;
+const int motorPin =  9;
+
+int switchState = 0;
+
+void setup() {
+  // motor pin is output
+  pinMode(motorPin, OUTPUT);      
+  // switchpin is input
+  pinMode(switchPin, INPUT);     
+}
+
+void loop(){
+  switchState = digitalRead(switchPin);
+  if (switchState == HIGH) {     
+    digitalWrite(motorPin, HIGH); // simply motor turns, like LED on high
+  } 
+  else {
+    digitalWrite(motorPin, LOW); // simply motor holds, like LED on low
+  }
+}
