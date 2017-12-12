@@ -1,0 +1,20 @@
+/*
+ Arduino Week 1 Project 1
+ */
+
+/*
+This is my first custom-built programme (learned with Jeremy Blum from a YouTube Tutorial)
+*/
+
+int ledPin = 13;
+
+void setup() {
+    pinMode (ledPin, OUTPUT);
+}
+
+void loop() {
+    digitalWrite(ledPin, HIGH);
+    delay(500);
+    digitalWrite(ledPin, LOW);
+    delay(1000);
+}
