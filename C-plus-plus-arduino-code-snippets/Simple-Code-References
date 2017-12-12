@@ -1,0 +1,38 @@
+/*
+Simple Code References
+*/
+
+int x = 10;
+uint8_t y = 10;
+float myNum = 10.0;
+float myNumTwo = 9.334;
+bool btnDown = false;
+string helloWorld = "Hello World";
+const myName = "Arjun Unlike a variable this will not change"
+char c = 'c';
+
+void checkSensors(){ //checkSensors is a function name; it can be anything
+  btnDown = digitalRead(3);
+}
+
+
+void setup() {
+    Serial.begin(9600);
+}
+
+
+
+void loop() {
+  
+   Serial.println("--------------------");
+  Serial.print("Hello World");
+  Serial.print(sensor.name);
+  Serial.print(sensor.version);
+  Serial.print(sensor.sensor_id);
+   Serial.println("--------------------");
+  
+    for(int i = 0; i < 4; i++){
+      digitalWrite(2, HIGH);
+      digitalWrite(2, LOW);
+    }
+}
