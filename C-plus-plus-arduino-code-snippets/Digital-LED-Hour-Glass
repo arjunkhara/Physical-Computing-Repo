@@ -1,0 +1,50 @@
+/*
+ Arduino Week 2 Project 8
+ */
+
+/*
+Arduino digital hour glass topic 8 of week 2
+ */
+
+
+const int switchPin = 8;
+
+unsigned long previousTime = 0;
+int switchState = 0;
+int prevSwitchState = 0;
+int led = 2;
+
+
+long interval = 600; //for the sake of experimentation set timer to 600ms
+
+void setup() {
+  for(int x = 2;x<8;x++){
+    pinMode(x, OUTPUT);
+  }
+  pinMode(switchPin, INPUT);
+}
+
+void loop(){ 
+  unsigned long currentTime = millis(); 
+  if(currentTime - previousTime > interval) {
+    previousTime = currentTime; 
+    // Turn LED on
+    digitalWrite(led, HIGH);
+    //progress led variable
+    led++; //led+1 cycles through
+    
+    if(led == 7){
+    }
+  }
+
+  switchState = digitalRead(switchPin); 
+  if(switchState != prevSwitchState){
+    // turn all LEDs off
+    for(int x = 2;x<8;x++){    
+      digitalWrite(x, LOW);
+    }  
+    led = 2;
+    previousTime = currentTime;
+  }
+  prevSwitchState = switchState;
+}
