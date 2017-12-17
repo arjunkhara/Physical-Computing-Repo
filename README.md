@@ -1098,3 +1098,37 @@ Building a voice-recognition robot is the culmination of ten weeks' worth of lea
 
 The kind of confidence, and more importantly, the kinds of vision, that one gets when completing a project like this is truly a life-changer. And for that my sincere and eternal thanks to Dr Phoenix Perry and Matthew Jarvis for all their influence, teachings and unending patience. My Goldsmiths Rover is therefore more than a cool piece of physical computing; it is also a philosophical reminder of how learning a technological skill can make you feel like you're about to conquer the world - and that is exactly how to begin.
 
+
+#### References and Bibliography
+
+• Arduino Community Forum, Arduino (2017) on Arduino Website (accessed November 2017) at https://forum.arduino.cc/index.php?topic=353524.0
+
+• Arduino Community Forum, Arduino (2017) on Arduino Website (accessed November 2017) at https://forum.arduino.cc/index.php?topic=423364.0
+
+• Arduino Stackexchange, Stack Exchange (2017) on Stack Exchange Website (accessed November 2017) at https://arduino.stackexchange.com/questions/1667/significance-of-the-numbers-used-in-the-manual
+
+• Arduino Tutorials, Arduino (2017) on Arduino Website (accessed November 2017) at www.arduino.cc
+
+• Beginning C++ Through Game Programming, Dawson, M (2015), United States of America:Cengage Learning
+
+• Beyond the Internet and Web, in Society & The Internet, Wilks, Y., eds. Graham, M. and Dutton, W.H., (2014), Oxford: Oxford University Press
+
+• Calibration and Programming (2017) on Adafruit Website (accessed November 2017) at https://learn.adafruit.com/adafruit-analog-accelerometer-breakouts/programming
+
+• Exploring Arduino: Tools and Techniques for Engineering Wizardry, Blum, J. (2013), Indiana: John Wiley & Sons
+
+• Games, Design and Play, A Detailed Approach to Iterative Game Design, Macklin, C and Sharp, J. (2016), New York: Addison-Wesley
+
+• Grove — 3-Axis Analog Accelerometer (2017) on SEEED Website (accessed November 2017) at http://wiki.seeed.cc/Grove-3-Axis_Analog_Accelerometer/
+
+• Influence of Parasitic Capacitance on Output Voltage for Series-Connected Thin-Film Piezoelectric Devices, Kensuke Kanda, Takashi Saito, Yuki Iga, Kohei Higuchi,2 and Kazusuke Maenaka (2012) on Sensors Basel. National Center for Biotechnology Information (accessed October 2017) at https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3571804/
+
+• I2C Between Arduinos by cornelam (2017) on Instructables Website (accessed November 2017) at http://www.instructables.com/id/I2C-between-Arduinos/
+
+• Piezoelectricity, Explain That Stuff (2017) on Explain That Stuff Website (accessed October 2017) at http://www.explainthatstuff.com/piezoelectricity.html
+
+• Practical Electronics for Inventors (4th Edition), Scherz, P. and Monk, S. (2016), New York:McGraw-Hill Education
+
+• Programming Arduino, Manhattan Middle School Multimedia Class (2017) on Google Sites (accessed October 2017) at https://sites.google.com/a/bvsd.org/smith-multimedia/programming-arduino
+
+• Sound Detector Hookup Guide, Byron J. (2017) on SparkFun (accessed November 2017) at https://learn.sparkfun.com/tutorials/sound-detector-hookup-guide
