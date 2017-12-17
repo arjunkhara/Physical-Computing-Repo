@@ -949,3 +949,73 @@ void loop() {
 }
 </code></pre>
 
+
+Below is basic code for the proximity sensor with LEDs for the Goldsmiths Rover, which can be adjusted for individual project use.
+<pre><code>
+/*
+Distance Sensor Sketch
+*/
+
+int trigPin = 12;
+int echoPin = 11;
+int ledBlueRight = 10;
+int ledBlueLeft = 9;
+int ledWhiteRight = 6;
+int ledWhiteLeft = 5;
+
+//int laserPin = 8;
+
+void setup() {
+    Serial.begin(9600);
+    pinMode (ledBlueRight, OUTPUT);
+    pinMode (ledBlueLeft, OUTPUT);
+    pinMode (ledWhiteRight, OUTPUT);
+    pinMode (ledWhiteLeft, OUTPUT);
+    pinMode (trigPin, OUTPUT);
+    pinMode (echoPin, INPUT);
+    digitalWrite(ledBlueRight, LOW);
+    digitalWrite(ledBlueLeft, LOW);
+    digitalWrite(ledWhiteRight, LOW);
+    digitalWrite(ledWhiteLeft, LOW);
+//pinMode(laserPin, OUTPUT);
+}
+
+void loop() {
+    long duration, distance;
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(trigPin, LOW);
+    duration=pulseIn(echoPin, HIGH);
+    distance= (duration/2)/29.1;
+    Serial.print(distance);
+    Serial.println("CM");
+    delay(10);
+    
+    if((distance <=30)){
+    digitalWrite(ledWhiteRight, HIGH);
+    digitalWrite(ledWhiteLeft, HIGH);
+    digitalWrite(ledBlueRight, HIGH);
+    digitalWrite(ledBlueLeft, HIGH);
+    }
+    
+    
+    else{
+    digitalWrite(ledWhiteRight, LOW);
+    delay(500);
+    digitalWrite(ledWhiteRight, HIGH);
+    delay(500);
+    digitalWrite(ledWhiteLeft, HIGH);
+    delay(500);
+    digitalWrite(ledWhiteLeft, LOW);
+    delay(500);
+    digitalWrite(ledBlueRight, HIGH);
+    delay(500);
+    digitalWrite(ledBlueRight, LOW);
+    delay(500);
+    digitalWrite(ledBlueLeft, HIGH);
+    delay(500);
+    digitalWrite(ledBlueLeft, LOW);
+    }
+}
+</code></pre>
+
