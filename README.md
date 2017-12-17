@@ -769,3 +769,166 @@ The rover has a proximity sensor attached to the front for the purposes of (a) d
 
 I built the chassis of the rover from acrylic, by laser-cutting the components. The bottom chassis has six slots cut underneath to act as a heat sink for the Arduino boards and the sensors. I have also cut the chassis to hold eight modules – extensible areas to install additional sensor kits. For structural integrity (I wanted the rover to be as hardy as possible) I tried to use as many complete pieces as possible and kept gluing to a minimum. I also reinforced the forward, rear, and bottom chassis supports with additional acrylic and hot glue. Around the motors I used extra hot glue between the motor housing and the undercarriage of the chassis so that when the glue dried, the additional material layers created a natural shock absorber for each of the independent motors. This enabled the rover to move at full power (255 applied to all drives) without shaking any of the wires or components loose. The rover can go over books, laptop charging bricks, phones with thick cases, small rocks, and over a hard mattress with plenty of lumps and pillows. With the architectural functionality in place, I laser cut the words ‘MARS 2030’ in the front of the rover – a nod towards the eventual landing of humans on Mars. The back panel of the rover has the words ‘Goldsmiths College’ and ‘@GSRover’ laser-cut into the back, since this project was completed and realised at my university, Goldsmiths, University of London. Additional acrylic sticks and pieces were used to attach sensor components to the rover; for example the heart beat sensor is attached to a servo that spins an acrylic arm outwards towards the player. I have also left six module components on the chassis free for any additional extensions.
 
+Below is the code and circuit diagram for the Goldsmiths Rover, with the Bluetooth module, motors, servo motors, and laser emitter.
+
+<pre><code>
+/*Arduino Goldsmiths Mars Rover Part 1: (Code for the Goldsmiths Mars Rover)*/
+/*
+Mars Rover - Voice Command Recognition
+Credits and sources: 
+• Viral Science (https://www.youtube.com/watch?v=2p1mZB3LHbg), 
+• Learning Engineering (https://www.youtube.com/watch?v=Kg3d79XbvY4), 
+• MechStuff (https://www.youtube.com/watch?v=KO1CaPIjt8M&t=129s), 
+• DroneBot Workshop (https://www.youtube.com/watch?v=6F1B_N6LuKw), 
+• Mert Arduino and Tech (https://www.youtube.com/watch?v=5z5evInThP4&t=13s), 
+• iforce2d (https://www.youtube.com/watch?v=uIHLcPocW5Y), 
+*/
+
+// Note: Disconnect RX and TX from the BT module BEFORE uploading the sketch
+
+#include  // motor library initiated
+#include  // servo library initiated
+String roverVoice; // holds the voice commands from AMR
+
+AF_DCMotor motor1 (1, MOTOR12_1KHZ);
+AF_DCMotor motor2 (2, MOTOR12_1KHZ);
+Servo roverServo;
+int servopos = 0;
+int laserPin = 12;
+
+void setup()
+{
+  Serial.begin(9600);
+  roverServo.attach(10);
+  roverServo.write(0); //servo test passed
+  pinMode(laserPin, OUTPUT);
+  digitalWrite(laserPin, LOW);
+
+}
+
+void loop() {
+  while (Serial.available()){ // available byte to read
+  delay(10); // delay for stable readings
+  char c = Serial.read(); // conduct serial read
+  if (c == '#') {break;} // exit loop when the # is detected after the word
+  roverVoice += c;
+  }
+  
+  if(roverVoice.length() > 0){ // something is being said; listen and execute
+
+  if(roverVoice== "*proceed"){
+  forward_rover(); // execute forward function
+  }
+  
+  else if(roverVoice== "*reverse"){
+  back_rover(); // execute reverse function
+  }
+  
+  else if(roverVoice== "*left") {
+  left_rover(); // execute left turn function
+  }
+  
+  else if(roverVoice== "*right") {
+  right_rover(); // execute right turn function
+  }
+  
+  else if(roverVoice== "*stop") {
+  stop_rover(); // execute stop function
+  }
+  
+  else if(roverVoice == "*locate Mars") {
+  roverServo.write(65); // execute stop function
+  delay(1000);
+  roverServo.write(35); // execute stop function
+  delay(1000);
+  roverServo.write(65); // execute stop function
+  delay(1000);
+  digitalWrite(laserPin, HIGH);
+  }
+  
+  else if(roverVoice== "*reset") {
+  stop_rover();
+  digitalWrite(laserPin, LOW);
+  delay(300);
+  digitalWrite(laserPin, HIGH);
+  delay(300);
+  digitalWrite(laserPin, LOW);
+  delay(300);
+  digitalWrite(laserPin, HIGH);
+  delay(300);
+  digitalWrite(laserPin, LOW);
+  delay(300);
+  digitalWrite(laserPin, HIGH);
+  delay(300);
+  digitalWrite(laserPin, LOW);
+  delay(1000);
+  roverServo.write(0);
+  }
+
+  roverVoice=""; //reset voice variable after initiating
+  }
+}
+
+/* Initiate all function writes here */
+
+void forward_rover() // forward motion function
+{
+  motor1.run(FORWARD);
+  motor1.setSpeed(255); // full power to motor, 0 to 255
+  motor2.run(FORWARD);
+  motor2.setSpeed(255); // full power to motor, 0 to 255
+  delay(2000);
+  motor1.run(RELEASE);
+  motor2.run(RELEASE);
+  Serial.print("Moving Forward");
+}
+
+  
+void back_rover() // reverse motion function
+{
+  motor1.run(BACKWARD);
+  motor1.setSpeed(255); // full power to motor, 0 to 255
+  motor2.run(BACKWARD);
+  motor2.setSpeed(255); // full power to motor, 0 to 255
+  delay(2000);
+  motor1.run(RELEASE);
+  motor2.run(RELEASE);
+  Serial.print("Moving Backward");
+}
+
+
+void left_rover() // left motion function
+{
+  //motor1.run(BACKWARD);
+  //motor1.setSpeed(255);
+  motor2.run(FORWARD);
+  motor2.setSpeed(255); // full power to motor, 0 to 255
+  delay(1000);
+  motor1.run(RELEASE);
+  motor2.run(RELEASE);
+  Serial.print("Turning Left");
+}
+
+
+void right_rover() // right motion function
+{
+  motor1.run(FORWARD);
+  motor1.setSpeed(255); // full power to motor, 0 to 255
+  //motor2.run(BACKWARD);
+  //motor2.setSpeed(255);
+  delay(1000);
+  motor1.run(RELEASE);
+  motor2.run(RELEASE);
+  Serial.print("Turning Right");
+}
+
+
+void stop_rover() // stop motion function
+{
+  roverServo.write(0);
+  motor1.run(RELEASE);
+  motor2.run(RELEASE);
+  Serial.print("Stop all motion");
+  </code></pre>
+  
+  
