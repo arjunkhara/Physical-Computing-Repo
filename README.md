@@ -1,5 +1,5 @@
-# arduino
-My physical computing and arduino projects
+# Physical Computing
+### My physical computing projects
 
 I’m Arjun. This is my weekly blog for the Physical Computing Module for my MA at Goldsmiths (2017 – 2018). I built this site to document my work, learnings, and insights on a weekly basis spanning this module’s duration. This repository also serves as a learning portal to question and experiment beyond the scope of what the module asks, in order to gain the deepest possible appreciation of physical computing and its evolving role as a companion in our digitally nebulous societies. Once completed, I hope to leave this blog as an active reference for future students of the subject.
 
@@ -721,3 +721,11 @@ delay(10);
 </code></pre>
 
 Here is the circuit diagram for the touchy-feely Piezo. The code block (above) can be changed to a variety of combinations, from the piezo remaining silent till contact is made, to a variety of notes based on contact. I have made a note in the code block above as to where these changes can be made: ![alt tag](https://github.com/arjunkhara/physical-computing-repo/blob/master/Piezo-Touchy-Feely.png "Topic 13 Additional Challenge Circuit Diagram")
+
+
+# Final Project (Voice-Recognition and Command Mars Rover)
+
+The Goldsmiths Mars Rover is the final term project for the Physical Computing module. This project encouraged me to not only combine the term’s work and learnings, but to play with and push the boundaries of physical computing. I decided to work on my own, independent project and after some deliberation decided to create a working replica of the Mars Rovers (Spirit, Curiosity, and Opportunity). The ultimate result was my own version, titled the Goldsmiths Rover, with its own Twitter account, @GSRover.
+
+The primary driving motivator of the Mars Rover was to not only create an interactive, playable device, but to also integrate action-at-a-distance. After considering several options, I decided in the end to tackle the issue of voice commands and voice recognition. I chose voice recognition over the other options (such as wifi shields and RX/TX modules) to make the project as accessible as possible to other people — visitors and players at the final exhibition — to be able to easily download an app and interact with the Goldsmiths Mars Rover, which would be quite cumbersome if I were to use easier developer options such as wifi and RX/TX. Ultimately, since this is a playable experience, I wanted to create an environment which makes involving people as easy and seamless as possible.
+
