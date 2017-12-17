@@ -1089,3 +1089,7 @@ forward_rover();
 }
 </code></pre>
 
+#### GOLDSMITHS MARS ROVER: INTER-INTEGRATED CIRCUIT (I2C)
+
+An incredibly useful and little-known feature of the Arduino is that pins A0 to A5 are in fact digital pins 14 to 18. And with some software integration, these pins can emulate PWM functionality. In addition, two Arduinos can work together as a single brain using the I2C configuration protocols. To make two Arduinos work with each other requires that both motherboards connect according to the I2C protocol. While complex in its nature and operability, the connectivity between two independent motherboards as one integrated platform requires that the A4 and A5 pins on each of the Arduino boards be connected to each other, in the same order (i.e. A4 to A4, and A5 to A5). These are the serial data lines and the serial clock lines. The ground pins on each board must also connect to each other in the manner discussed above. Once this has been achieved, code is required for the two Arduinos to understand their hierarchy: one is the master board and the other the slave board. In this case the Wire.h library is essential. This project, in the end, did not require this relationship but I was happy that I managed to experiment with this setup, which I can see has many more complex applications.
+
