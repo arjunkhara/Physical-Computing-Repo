@@ -931,4 +931,21 @@ void stop_rover() // stop motion function
   Serial.print("Stop all motion");
   </code></pre>
   
-  
+
+Below is basic code for the laser emitter for the Goldsmiths Rover, which can be adjusted for individual project use.
+
+<pre><code>
+int laserPin = 10;
+
+void setup() {                
+	pinMode(laserPin, OUTPUT);  // Define the digital output interface pin 13 
+}
+
+void loop() {
+	digitalWrite(laserPin, HIGH); // Open the laser head
+	delay(1000); // Delay one second
+	digitalWrite(laserPin, LOW); // Close the laser head
+	delay(1000); 
+}
+</code></pre>
+
