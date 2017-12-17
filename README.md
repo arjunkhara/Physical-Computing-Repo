@@ -1054,3 +1054,38 @@ void loop() {
 }
 </code></pre>
 
+
+Below is basic code for the magnetic hall sensor for the Goldsmiths Rover, which can be adjusted for individual project use.
+
+<pre><code>
+int magHall = 14;
+int magHallState = 0; 
+
+void setup() {
+pinMode(magHall, INPUT);     
+}
+
+void loop(){
+magHallState = digitalRead(magHall);
+
+if ((magHallState == LOW)) {     
+//perform an action, in this case call the function to stop the rover and investigate
+stop_rover();
+//extend heart beat sensor, record values, change rover direction to avoid going over object, proceed on mission
+roverServo.write(90);
+delay(5000);
+Serial.println(analogRead(A0) / 10);
+delay(1000);
+back_rover();
+right_rover();
+forward_rover();
+//the three functions above can be combined into a larger 'explore' function
+} 
+
+else {
+//keep running the rover
+forward_rover();
+  }
+}
+</code></pre>
+
